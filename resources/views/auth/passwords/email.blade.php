@@ -8,7 +8,7 @@
     <div class="container bg-gray-900 text-gray-200 p-3 rounded shadow-xl">
 
         <p class="h3">{{ __('Reset password') }}</p>
-        <p class="text-blue-500 my-3">{{ __('Complete with your data') }}</p>
+        <p class="text-green-500 my-3">{{ __('Complete with your data') }}</p>
 
         @if (session('status'))
             <div class="alert alert-success" role="alert">

@@ -15,30 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // $publications = Publication::all();
-
-    // foreach ($publications as $publication) {
-    //     echo "<h3>Publication</h3>";
-    //     echo $publication->user->name . ": " . $publication->description . "<br/>";
-        
-    //     echo "Esta publicacion tiene: " . count($publication->likes) . " likes";
-
-    //     echo "<h4>Comments</h4>";
-    //     foreach ($publication->comments as $comments) {
-    //         echo $comments->user->name . ": " .$comments->description . "<br/>";
-    //     }
-
-    //     echo "<hr/>";
-
-    // }
-
-    // die();
-  
     return view('welcome');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+Route::group(['prefix' => "profile"], function(){
+    Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();

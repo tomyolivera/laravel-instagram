@@ -19,6 +19,12 @@
                 <input type="email" name="email" id="email" class="form-control" required />
             </div>
 
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+
             {{-- Password --}}
             <div class="form-group">
                 <label for="password">{{ __('Password') }}</label>
@@ -30,6 +36,11 @@
                     </span>
                 @enderror
             </div>
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
 
             {{-- Extras --}} 
             <div class="form-group">

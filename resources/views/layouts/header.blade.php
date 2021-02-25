@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-gray-800 shadow-sm">
+<nav class="navbar navbar-expand-md navbar-dark bg-gray-900 shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -38,8 +38,11 @@
                             {{ Auth::user()->name }}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                        <div class="dropdown-menu dropdown-menu-right bg-gray-800 shadow-xl rounded p-2">
+                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('profile') }}">{{ __('My Profile') }}</a>
+                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="#">{{ __('Settings') }}</a>
+                            <hr class="bg-gray-300">
+                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

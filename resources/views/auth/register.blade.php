@@ -120,7 +120,11 @@
 
             {{-- Extras --}}
             <div class="form-group">
-                <button class="btn btn-outline-primary btn-block">{{ __('Register') }}</button>
+                <button class="btn btn-outline-success btn-block my-3">{{ __('Register') }}</button>
+
+                <a class="text-blue-500" href="{{ route('login') }}">
+                    {{ __('Do you already have an account? Log In!') }}
+                </a>
             </div>
         </form>
     </div>
