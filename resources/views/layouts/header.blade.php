@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-gray-900 shadow-sm">
+<nav class="navbar navbar-expand-md navbar-dark bg-gray-900 shadow-2xl">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -33,13 +33,18 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
+                    <li class="nav-item dropdown"> 
+                            <a id="navbarDropdown" class="nav-link flex align-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                @include('user.photo')
+                                <div class="m-2">
+                                    {{ Auth::user()->name }}
+                                </div>
+                                <div class="dropdown-toggle mt-2"></div>
+                            </a>
 
                         <div class="dropdown-menu dropdown-menu-right bg-gray-800 shadow-xl rounded p-2">
-                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('profile') }}">{{ __('My Profile') }}</a>
+                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('tasks') }}">{{ __('My Tasks') }}</a>
+                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('user') }}">{{ __('My Profile') }}</a>
                             <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="#">{{ __('Settings') }}</a>
                             <hr class="bg-gray-300">
                             <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('logout') }}"

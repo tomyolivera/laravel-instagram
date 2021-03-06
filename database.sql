@@ -17,10 +17,6 @@ CREATE TABLE IF NOT EXISTS users(
     CONSTRAINT uq_username UNIQUE(username)
 )ENGINE=INNODB;
 
-INSERT INTO users VALUES(null, "tomy_olivera", "Tomas Olivera", "bokita", "tomasolivera27@gmail.com", "12345", "user", null, CURTIME(), CURTIME(), null);
-INSERT INTO users VALUES(null, "juan_lopez", "Juan Lopez", "juancito", "juan@gmail.com", "12345", "user", null, CURTIME(), CURTIME(), null);
-INSERT INTO users VALUES(null, "pedrito123", "Pedro Garcia", "pedrito", "pedro@gmail.com", "12345", "user", null, CURTIME(), CURTIME(), null);
-
 DROP TABLE IF EXISTS publications;
 CREATE TABLE IF NOT EXISTS publications(
     id INT(11) AUTO_INCREMENT NOT NULL,
@@ -82,3 +78,50 @@ INSERT INTO likes VALUES(null, 1, 3, CURTIME(), CURTIME());
 INSERT INTO likes VALUES(null, 1, 2, CURTIME(), CURTIME());
 INSERT INTO likes VALUES(null, 2, 3, CURTIME(), CURTIME());
 INSERT INTO likes VALUES(null, 3, 1, CURTIME(), CURTIME());
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE IF NOT EXISTS users(
+    id INT(11) AUTO_INCREMENT NOT NULL,
+    username VARCHAR(35) NOT NULL,
+    name VARCHAR(60) NOT NULL,
+    nickname VARCHAR(35),
+    email VARCHAR(150) NOT NULL,
+    password VARCHAR(255),
+    role VARCHAR(20) NOT NULL,
+    photo VARCHAR(500),
+    created_at DATETIME,
+    updated_at DATETIME,
+    remember_token VARCHAR(255),
+
+    CONSTRAINT pk_users PRIMARY KEY(id),
+    CONSTRAINT uq_email UNIQUE(email),
+    CONSTRAINT uq_username UNIQUE(username)
+)ENGINE=INNODB;
+
+DROP TABLE IF EXISTS category_tasks;
+CREATE TABLE IF NOT EXISTS category_tasks(
+    id INT(11) AUTO_INCREMENT NOT NULL,
+    user_id INT(11) NOT NULL,
+    name VARCHAR(60) NOT NULL,
+    color VARCHAR(50),
+    created_at DATETIME,
+    updated_at DATETIME,
+
+    CONSTRAINT pk_tasks PRIMARY KEY(id),
+    CONSTRAINT fk_user_category_tasks FOREIGN KEY(user_id) REFERENCES users(id)
+)ENGINE=INNODB;
+
+DROP TABLE IF EXISTS tasks;
+CREATE TABLE IF NOT EXISTS tasks(
+    id INT(11) AUTO_INCREMENT NOT NULL,
+    user_id INT(11) NOT NULL,
+    category_id INT(11) NOT NULL,
+    name VARCHAR(60) NOT NULL,
+    description VARCHAR(35),
+    created_at DATETIME,
+    updated_at DATETIME,
+
+    CONSTRAINT pk_tasks PRIMARY KEY(id),
+    CONSTRAINT fk_user_tasks FOREIGN KEY(user_id) REFERENCES users(id),
+    CONSTRAINT fk_category_tasks FOREIGN KEY(category_id) REFERENCES category_tasks(id)
+)ENGINE=INNODB;

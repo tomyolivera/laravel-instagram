@@ -5,16 +5,42 @@
 @endsection
 
 @section('content')
-    <?php $divclass = "col col-md-3 bg-gray-900 text-gray-200 p-3 rounded shadow-xl mr-4" ?>
+    <?php $divclass = "col col-md-3 bg-gray-800 text-gray-200 p-0 rounded mr-4 max-w-sm overflow-hidden shadow-xl text-center" ?>
 
+    
     <div class="container">
         <div class="row">
-            <div class="{{ $divclass }}">
-                <p class="h3">{{ __('My profile') }}</p>
-                <p class="text-blue-500 my-3">{{ __('Your data:') }}</p>
+            @if (session('success'))
+                <div class="alert alert-success d-flex justify-between">
+                    <strong> {{ session('success') }} </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
 
-                <form method="POST" action="{{ route('register') }}">
+            <div class="{{ $divclass }}">
+                <div class="shadow-2xl border-bottom p-3 mb-3">
+                    <p class="h3">{{ __('My profile') }}</p>
+                    <p class="text-blue-500 my-3">{{ __('Your data:') }}</p>
+
+                    {{-- Photo --}}
+                    <div class="d-flex justify-center my-3">
+                        @if (Auth::user()->photo)
+                            <img class="w-20 h-20 rounded-full" src="{{ route('photo', ['filename' => Auth::user()->photo]) }}" />
+                        @endif
+                    </div>
+                </div>
+                
+                <form method="POST" action="{{ route('update') }}" enctype="multipart/form-data" class="p-3">
                     @csrf
+                    
+                    
+                    {{-- <div class="form-group">
+                        <label for="photo">{{ __('Photo') }}</label>
+                        <input  type="file" 
+                                id="photo"
+                                name="photo"
+                                class="form-control @error('name') is-invalid @enderror" />
+                    </div> --}}
 
                     {{-- Name --}}
                     <div class="form-group">
@@ -22,12 +48,12 @@
                         <input  type="text" 
                                 id="name"
                                 name="name"
-                                value="{{ $profile->name }}"
+                                value="{{ Auth::user()->name }}"
                                 class="form-control @error('name') is-invalid @enderror"
                                 autocomplete="off"
                                 minlength="3"
                                 maxlength="60"
-                                required autofocus />
+                                required />
 
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -42,33 +68,14 @@
                         <input  type="text" 
                                 id="username"
                                 name="username"
-                                value="{{ $profile->username }}"
+                                value="{{ Auth::user()->username }}"
                                 class="form-control @error('username') is-invalid @enderror"
                                 autocomplete="off"
                                 minlength="6"
                                 maxlength="35"
-                                required autofocus />
+                                required />
 
                         @error('username')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    {{-- Nickname --}}
-                    <div class="form-group">
-                        <label for="nickname">{{ __('Nickname') }}</label>
-                        <input  type="text" 
-                                id="nickname"
-                                name="nickname"
-                                value="{{ $profile->nickname }}"
-                                class="form-control @error('nickname') is-invalid @enderror"
-                                autocomplete="off"
-                                maxlength="25"
-                                autofocus />
-
-                        @error('nickname')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -81,7 +88,7 @@
                         <input  type="email"
                                 name="email"
                                 id="email"
-                                value="{{ $profile->email }}" 
+                                value="{{ Auth::user()->email }}" 
                                 class="form-control @error('email') is-invalid @enderror"
                                 autocomplete="off"
                                 required />
@@ -95,16 +102,18 @@
 
                     {{-- Extras --}}
                     <div class="form-group">
-                        <button class="btn bg-red-500 btn-block my-3">{{ __('Save changes') }}</button>
+                        <button class="btn btn-outline-primary btn-block my-3">{{ __('Save changes') }}</button>
                     </div>
                 </form>
             </div>
 
             <div class="{{ $divclass }}">
-                <p class="h3">{{ __('More about me') }}</p>
-                <p class="text-blue-500 my-3">{{ __('Complete with your data:') }}</p>
+                <div class="shadow-2xl border-bottom p-3 mb-3">
+                    <p class="h3">{{ __('More about me') }}</p>
+                    <p class="text-blue-500 my-3">{{ __('Complete with your data:') }}</p>
+                </div>
 
-                <form method="post" action="">
+                <form method="post" action="" class="p-3">
                     @csrf
 
                     {{-- Birthday --}}
@@ -115,7 +124,7 @@
                                 name="birthday"
                                 value=""
                                 class="form-control @error('birthday') is-invalid @enderror"
-                                required autofocus />
+                                required />
 
                         @error('birthday')
                             <span class="invalid-feedback" role="alert">
@@ -123,16 +132,23 @@
                             </span>
                         @enderror
                     </div>
+
+                    {{-- Extras --}}
+                    <div class="form-group">
+                        <button class="btn btn-outline-primary btn-block my-3">{{ __('Save changes') }}</button>
+                    </div>
                 </form>
 
             </div>
 
             {{-- Change password --}}
             <div class="{{ $divclass }}">
-                <p class="h3">{{ __('Change password') }}</p>
-                <p class="text-blue-500 my-3">{{ __('Complete with your data:') }}</p>
+                <div class="shadow-2xl border-bottom p-3 mb-3">
+                    <p class="h3">{{ __('Change password') }}</p>
+                    <p class="text-blue-500 my-3">{{ __('Complete with your data:') }}</p>
+                </div>
 
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}" class="p-3">
                     @csrf
 
                     {{-- Old password --}}
@@ -142,7 +158,6 @@
                                 name="oldpassword"
                                 id="oldpassword"
                                 class="form-control @error('password') is-invalid @enderror"
-                                autocomplete="off"
                                 required />
 
                         @error('oldpassword')
@@ -159,7 +174,6 @@
                                 name="password"
                                 id="password"
                                 class="form-control @error('password') is-invalid @enderror"
-                                autocomplete="off"
                                 required />
 
                         @error('password')
@@ -176,16 +190,17 @@
                                 name="password_confirmation"
                                 id="password_confirm"
                                 class="form-control @error('password') is-invalid @enderror"
-                                autocomplete="off"
                                 required />
                     </div>
 
                     {{-- Extras --}}
                     <div class="form-group">
-                        <button class="btn btn-block my-3 text-gray-300 bg-green-600 hover:bg-green-800 hover:text-gray-300 border-4 border-red-600 ">{{ __('Save changes') }}</button>
+                        <button class="btn btn-outline-primary btn-block my-3">{{ __('Save changes') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <user-component />
 @endsection

@@ -24,7 +24,7 @@
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body class="bg-gray-700">
+<body class="bg-gray-900">
     <div id="app">
         @include('layouts.header')
 
@@ -37,7 +37,8 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
-        $(".form-control").addClass("bg-gray-800 focus:bg-gray-700 text-gray-300 focus:text-gray-300")
+        $(".form-control").addClass("bg-gray-800 focus:bg-gray-700 text-gray-300 focus:text-gray-300");
+        $(".bg-gray-800").removeClass("bg-gray-800").css('background-color', '#000333');
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

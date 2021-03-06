@@ -5,16 +5,18 @@
 @endsection
 
 @section('content')
-    <div class="container bg-gray-900 text-gray-200 p-3 rounded shadow-xl">
+    <div class="container bg-gray-800 text-gray-200 p-0 rounded shadow-xl">
 
-        <p class="h3">{{ __('Register') }}</p>
-        <p class="text-blue-500 my-3">{{ __('Complete with your data') }}</p>
+        <div class="shadow-2xl border-bottom p-3 mb-3 text-center">
+            <p class="h3">{{ __('Register') }}</p>
+            <p class="text-blue-500 my-3">{{ __('Complete with your data') }}</p>
+        </div>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" class="p-3">
             @csrf
 
             {{-- Name --}}
-            <div class="form-group">
+            <div class="form-group my-4">
                 <label for="name">{{ __('Name') }}</label>
                 <input  type="text" 
                         id="name"
@@ -34,7 +36,7 @@
             </div>
 
             {{-- Username --}}
-            <div class="form-group">
+            <div class="form-group my-4">
                 <label for="username">{{ __('Username') }}</label>
                 <input  type="text" 
                         id="username"
@@ -53,27 +55,8 @@
                 @enderror
             </div>
 
-            {{-- Nickname --}}
-            <div class="form-group">
-                <label for="nickname">{{ __('Nickname') }}</label>
-                <input  type="text" 
-                        id="nickname"
-                        name="nickname"
-                        value="{{ old('nickname') }}"
-                        class="form-control @error('nickname') is-invalid @enderror"
-                        autocomplete="nickname"
-                        maxlength="25"
-                        autofocus />
-
-                @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
             {{-- Email --}}
-            <div class="form-group">
+            <div class="form-group my-4">
                 <label for="email">{{ __('Email') }}</label>
                 <input  type="email"
                         name="email"
@@ -91,7 +74,7 @@
             </div>
 
             {{-- Password --}}
-            <div class="form-group">
+            <div class="form-group my-4">
                 <label for="password">{{ __('Password') }}</label>
                 <input  type="password"
                         name="password"
@@ -108,7 +91,7 @@
             </div>
 
             {{-- Repeat password --}}
-            <div class="form-group">
+            <div class="form-group my-4">
                 <label for="password_confirm">{{ __('Repeat password') }}</label>
                 <input  type="password"
                         name="password_confirmation"
