@@ -34,15 +34,19 @@ class UserController extends Controller
         $name = $request->input('name');
         $username = $request->input('username');
         $email = $request->input('email');
+        $status = $request->input('status');
         
         // If user data and form data are equal, return view
-        if( ($name == $user->name) && ($username == $user->username) && ($email == $user->email) ) return redirect('user');
+        if($status != 0 && $status != 1 && $status != 2) return redirect('user');
+
+        if( ($status == $user->status) && ($name == $user->name) && ($username == $user->username) && ($email == $user->email) ) return redirect('user');
 
         // Validate fields
         $this->validate($request, [
             'name' => ['required', 'string', 'min:3', 'max:60'],
             'username' => ['required', 'string', 'min:6', 'max:35', 'unique:users,username,' . $user->id],
-            'email' => ['required', 'email', 'max:150', 'unique:users,email,' . $user->id]
+            'email' => ['required', 'email', 'max:150', 'unique:users,email,' . $user->id],
+            'status' => ['required']
         ]);
         
         // Set / Update image
@@ -59,6 +63,7 @@ class UserController extends Controller
         $user->name = $name;
         $user->username = $username;
         $user->email = $email;
+        $user->status = $status;
         
         // Update table
         $user->update();

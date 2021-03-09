@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS users(
     nickname VARCHAR(35),
     email VARCHAR(150) NOT NULL,
     password VARCHAR(255),
+    status INT(1) NOT NULL DEFAULT 0,
     role VARCHAR(20) NOT NULL,
     photo VARCHAR(500),
     created_at DATETIME,

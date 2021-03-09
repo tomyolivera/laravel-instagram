@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container bg-gray-800 text-gray-200 p-0 rounded shadow-xl">
+    <div class="container bg-black text-gray-200 p-0 rounded shadow-xl">
 
         <div class="shadow-2xl border-bottom p-3 mb-3 text-center">
             <p class="h3">{{ __('Register') }}</p>
@@ -22,7 +22,7 @@
                         id="name"
                         name="name"
                         value="{{ old('name') }}"
-                        class="form-control @error('name') is-invalid @enderror"
+                        class="input @error('name') is-invalid @enderror"
                         autocomplete="name"
                         minlength="3"
                         maxlength="60"
@@ -42,7 +42,7 @@
                         id="username"
                         name="username"
                         value="{{ old('username') }}"
-                        class="form-control @error('username') is-invalid @enderror"
+                        class="input @error('username') is-invalid @enderror"
                         autocomplete="username"
                         minlength="6"
                         maxlength="35"
@@ -62,7 +62,7 @@
                         name="email"
                         id="email"
                         value="{{ old('email') }}" 
-                        class="form-control @error('email') is-invalid @enderror"
+                        class="input @error('email') is-invalid @enderror"
                         autocomplete="email"
                         required />
 
@@ -79,7 +79,7 @@
                 <input  type="password"
                         name="password"
                         id="password"
-                        class="form-control @error('password') is-invalid @enderror"
+                        class="input @error('password') is-invalid @enderror"
                         autocomplete="new-password"
                         required />
 
@@ -96,7 +96,7 @@
                 <input  type="password"
                         name="password_confirmation"
                         id="password_confirm"
-                        class="form-control @error('password') is-invalid @enderror"
+                        class="input @error('password') is-invalid @enderror"
                         autocomplete="new-password"
                         required />
             </div>

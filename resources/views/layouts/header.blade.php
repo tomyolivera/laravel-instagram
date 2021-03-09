@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-gray-900 shadow-2xl">
+<nav class="navbar navbar-expand-md navbar-dark bg-gray-900 shadow-2xl sticky-top">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -33,6 +33,8 @@
                         </li>
                     @endif
                 @else
+                    <?php $aclass = "dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-800 flex align-center" ?>
+
                     <li class="nav-item dropdown"> 
                             <a id="navbarDropdown" class="nav-link flex align-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 @include('user.photo')
@@ -41,17 +43,17 @@
                                 </div>
                                 <div class="dropdown-toggle mt-2"></div>
                             </a>
-
                         <div class="dropdown-menu dropdown-menu-right bg-gray-800 shadow-xl rounded p-2">
-                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('tasks') }}">{{ __('My Tasks') }}</a>
-                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('user') }}">{{ __('My Profile') }}</a>
-                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="#">{{ __('Settings') }}</a>
-                            <hr class="bg-gray-300">
-                            <a class="dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-600" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                            <a class="{{ $aclass }}" href="{{ route('tasks') }}"> {{ __('My Tasks') }} <i class="text-blue-500">tasks</i></a>
+
+                            <a class="{{ $aclass }}" href="{{ route('user') }}"> {{ __('My Profile') }} <i class="text-green-500">account_circle</i></a>
+
+                            <a class="{{ $aclass }}" href="#"> {{ __('Settings') }} <i class="text-gray-500">settings</i></a>
+
+                            <hr class="bg-white" />
+
+                            <a class="{{ $aclass }}" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }} <i class="text-red-500">logout</i></a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

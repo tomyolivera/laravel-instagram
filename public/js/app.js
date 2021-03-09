@@ -1910,7 +1910,7 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {},
-  created: function created() {}
+  mounted: function mounted() {}
 });
 
 /***/ }),

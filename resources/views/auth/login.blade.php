@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container bg-gray-800 text-gray-200 p-0 rounded shadow-xl">
+    <div class="container bg-black text-gray-200 p-0 rounded shadow-xl">
 
         <div class="shadow-2xl border-bottom p-3 mb-3 text-center">
             <p class="h3">{{ __('Login') }}</p>
@@ -18,7 +18,7 @@
             {{-- Email --}}
             <div class="form-group my-4">
                 <label for="email">{{ __('Email') }}</label>
-                <input type="email" name="email" id="email" class="form-control" required />
+                <input type="email" name="email" id="email" class="input" required />
             </div>
 
             @error('email')
@@ -30,7 +30,7 @@
             {{-- Password --}}
             <div class="form-group my-4">
                 <label for="password">{{ __('Password') }}</label>
-                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="current-password" />
+                <input type="password" name="password" id="password" class="input @error('password') is-invalid @enderror" required autocomplete="current-password" />
 
                 @error('password')
                     <span class="invalid-feedback" role="alert">

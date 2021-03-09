@@ -10,7 +10,7 @@
         methods: {
 
         },
-        created(){
+        mounted(){
             
         },
     }

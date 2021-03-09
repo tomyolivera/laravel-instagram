@@ -20,4 +20,9 @@ class TaskController extends Controller
 
         return view('tasks.index')->with('tasks', $tasks);
     }
+
+    public function create()
+    {
+        
+    }
 }

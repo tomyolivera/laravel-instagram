@@ -37,8 +37,21 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
-        $(".form-control").addClass("bg-gray-800 focus:bg-gray-700 text-gray-300 focus:text-gray-300");
-        $(".bg-gray-800").removeClass("bg-gray-800").css('background-color', '#000333');
+        // Form
+        $(".input").addClass(`bg-black text-gray-300 border-1 border-gray-800 appearance-none leading-tight w-full px-4 py-2 rounded
+                                focus:text-gray-300 focus:outline-none focus:border-blue-700`
+                            );
+
+        // Stlyes
+
+        // Icons
+        $("i").addClass("material-icons mx-2");
+
+        // Titles font size: h1, h2...
+        for (let i = 1; i <= 6; i++) $("h" + i).addClass("h" + i); 
+
+        // Buttons
+        $(".button-blue").addClass(`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full border-1 border-gray-300`);
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
