@@ -36,9 +36,10 @@ class UserController extends Controller
         $email = $request->input('email');
         $status = $request->input('status');
         
-        // If user data and form data are equal, return view
+        //If status is not valid, retrun view
         if($status != 0 && $status != 1 && $status != 2) return redirect('user');
 
+        // If user data and form data are equal, return view
         if( ($status == $user->status) && ($name == $user->name) && ($username == $user->username) && ($email == $user->email) ) return redirect('user');
 
         // Validate fields
