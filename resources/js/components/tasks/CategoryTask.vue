@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form @submit.prevent="add()">
+                        <!-- <form @submit.prevent="add()">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" class="input" v-model="categorie.name" autocomplete="off" :minlength="MIN" :maxlength="MAX_DESC" required>
@@ -22,7 +22,7 @@
                                 <button class="btn btn-primary btn-block mt-3" id="btn_add">Add</button>
                                 <span class="my-2 text-red-500" id="tasks_msg"></span>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>

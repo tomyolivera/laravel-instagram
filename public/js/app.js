@@ -1950,7 +1950,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-Object(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 //
 //
 //
@@ -2016,8 +2015,8 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
 //
 //
 //
-
-
+// import formatDate from "Store";
+// import showMsg from "Store";
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Tasks',
   data: function data() {
@@ -2038,13 +2037,14 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
     this.get();
   },
   methods: {
-    // formatDate(date){
-    //     const d = new Date(date);
-    //     return d.getDate() + '/' + (d.getMonth() + 1)  + '/' + d.getFullYear();
-    // },
-    // showMsg(field, msg = ""){
-    //     $("#" + field + "_msg").html(msg);
-    // },
+    formatDate: function formatDate(date) {
+      var d = new Date(date);
+      return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+    },
+    showMsg: function showMsg(field) {
+      var msg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+      $("#" + field + "_msg").html(msg);
+    },
     validFields: function validFields() {
       // let isValidName = this.task.name.length >= this.MIN && this.task.name.length <= this.MAX_NAME;
       var isValidDesc = this.task.description.length >= this.MIN && this.task.description.length <= this.MAX_DESC; // let isValidCategory = this.task.category >= this.MIN;
@@ -2053,11 +2053,11 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
       //     ? this.showMsg("name")
       //     : this.showMsg("name", "The field name must contain " + this.MIN + "-" + this.MAX_NAME + " characters");
 
-      isValidDesc ? Object(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())("description") : Object(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())("description", "The field description must contain " + this.MIN + "-" + this.MAX_DESC + " characters"); // isValidCategory
+      isValidDesc ? this.showMsg("description") : this.showMsg("description", "The field description must contain " + this.MIN + "-" + this.MAX_DESC + " characters"); // isValidCategory
       //     ? this.showMsg("category")
       //     : this.showMsg("category", "The field category must contain " + this.MIN + " character");
 
-      isValidTasksLength ? Object(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())("tasks") : Object(function webpackMissingModule() { var e = new Error("Cannot find module 'Store'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())("tasks", "Max tasks reached: " + this.MAX_TASKS);
+      isValidTasksLength ? this.showMsg("tasks") : this.showMsg("tasks", "Max tasks reached: " + this.MAX_TASKS);
       return isValidDesc && isValidTasksLength;
     },
     resetFields: function resetFields() {
@@ -37773,120 +37773,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        attrs: {
-          type: "button",
-          "data-bs-toggle": "modal",
-          "data-bs-target": "#addCategory"
-        }
-      },
-      [_vm._v("Add Category")]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "modal fade", attrs: { id: "addCategory" } }, [
-      _c("div", { staticClass: "modal-dialog" }, [
-        _c("div", { staticClass: "modal-content bg-gray-800" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c(
-              "form",
-              {
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.add()
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.categorie.name,
-                        expression: "categorie.name"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: {
-                      type: "text",
-                      name: "name",
-                      autocomplete: "off",
-                      minlength: _vm.MIN,
-                      maxlength: _vm.MAX_DESC,
-                      required: ""
-                    },
-                    domProps: { value: _vm.categorie.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.categorie, "name", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", {
-                    staticClass: "my-2 text-red-500",
-                    attrs: { id: "name_msg" }
-                  })
-                ]),
-                _vm._v(" "),
-                _vm._m(1)
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Add Category")]),
-      _vm._v(" "),
-      _c("button", {
-        staticClass: "btn-close",
-        attrs: {
-          type: "button",
-          "data-bs-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
+    return _c("div", [
       _c(
         "button",
         {
-          staticClass: "btn btn-primary btn-block mt-3",
-          attrs: { id: "btn_add" }
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-bs-toggle": "modal",
+            "data-bs-target": "#addCategory"
+          }
         },
-        [_vm._v("Add")]
+        [_vm._v("Add Category")]
       ),
       _vm._v(" "),
-      _c("span", {
-        staticClass: "my-2 text-red-500",
-        attrs: { id: "tasks_msg" }
-      })
+      _c("div", { staticClass: "modal fade", attrs: { id: "addCategory" } }, [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content bg-gray-800" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c("h5", { staticClass: "modal-title" }, [
+                _vm._v("Add Category")
+              ]),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "btn-close",
+                attrs: {
+                  type: "button",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" })
+          ])
+        ])
+      ])
     ])
   }
 ]

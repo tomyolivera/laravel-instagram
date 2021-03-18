@@ -65,8 +65,8 @@
 
 <script>
 
-import formatDate from "Store";
-import showMsg from "Store";
+// import formatDate from "Store";
+// import showMsg from "Store";
 
 export default {
     name: 'Tasks',
@@ -85,13 +85,13 @@ export default {
         this.get();
     },
     methods: {
-        // formatDate(date){
-        //     const d = new Date(date);
-        //     return d.getDate() + '/' + (d.getMonth() + 1)  + '/' + d.getFullYear();
-        // },
-        // showMsg(field, msg = ""){
-        //     $("#" + field + "_msg").html(msg);
-        // },
+        formatDate(date){
+            const d = new Date(date);
+            return d.getDate() + '/' + (d.getMonth() + 1)  + '/' + d.getFullYear();
+        },
+        showMsg(field, msg = ""){
+            $("#" + field + "_msg").html(msg);
+        },
         validFields(){
             // let isValidName = this.task.name.length >= this.MIN && this.task.name.length <= this.MAX_NAME;
             let isValidDesc = this.task.description.length >= this.MIN && this.task.description.length <= this.MAX_DESC;
@@ -103,16 +103,16 @@ export default {
             //     : this.showMsg("name", "The field name must contain " + this.MIN + "-" + this.MAX_NAME + " characters");
 
             isValidDesc
-                ? showMsg("description")
-                : showMsg("description", "The field description must contain " + this.MIN + "-" + this.MAX_DESC + " characters");                
+                ? this.showMsg("description")
+                : this.showMsg("description", "The field description must contain " + this.MIN + "-" + this.MAX_DESC + " characters");                
 
             // isValidCategory
             //     ? this.showMsg("category")
             //     : this.showMsg("category", "The field category must contain " + this.MIN + " character");
                 
             isValidTasksLength
-                ? showMsg("tasks")
-                : showMsg("tasks", "Max tasks reached: " + this.MAX_TASKS);
+                ? this.showMsg("tasks")
+                : this.showMsg("tasks", "Max tasks reached: " + this.MAX_TASKS);
 
             return isValidDesc && isValidTasksLength;
         },
