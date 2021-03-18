@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="container bg-black text-gray-200 p-0 rounded shadow-xl">
+    <div class="container bg-black text-gray-200 p-0 rounded shadow-xl border-1 border-gray-800">
 
-        <div class="shadow-2xl border-bottom p-3 mb-3 text-center">
+        <div class="shadow-2xl border-left-0 border-right-0 border-top-0 border-1 border-gray-800 p-3 mb-3 text-center">
             <p class="h3">{{ __('Register') }}</p>
             <p class="text-blue-500 my-3">{{ __('Complete with your data') }}</p>
         </div>
@@ -105,7 +105,7 @@
             <div class="form-group">
                 <button class="btn btn-outline-success btn-block my-3">{{ __('Register') }}</button>
 
-                <a class="text-blue-500" href="{{ route('login') }}">
+                <a class="text-yellow-500 hover:text-yellow-500" href="{{ route('login') }}">
                     {{ __('Do you already have an account? Log In!') }}
                 </a>
             </div>

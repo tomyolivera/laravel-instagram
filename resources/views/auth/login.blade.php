@@ -5,9 +5,9 @@
 @endsection
 
 @section('content')
-    <div class="container bg-black text-gray-200 p-0 rounded shadow-xl">
+    <div class="container bg-black text-gray-200 p-0 rounded shadow-xl border-1 border-gray-800">
 
-        <div class="shadow-2xl border-bottom p-3 mb-3 text-center">
+        <div class="shadow-2xl border-left-0 border-right-0 border-top-0 border-1 border-gray-800 p-3 mb-3 text-center">
             <p class="h3">{{ __('Login') }}</p>
             <p class="text-green-500 my-3">{{ __('Complete with your data') }}</p>
         </div>
@@ -60,13 +60,13 @@
                 <button class="btn btn-outline-success btn-block my-3">{{ __('Login') }}</button>
 
                 @if (Route::has('password.request'))
-                    <a class="text-blue-500" href="{{ route('password.request') }}">
+                    <a class="text-yellow-500 hover:text-yellow-500" href="{{ route('password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a>
                 @endif
                 <br>
-                <a class="text-blue-500" href="{{ route('register') }}">
-                    {{ __('Or register here?') }}
+                <a class="text-yellow-500 hover:text-yellow-500" href="{{ route('register') }}">
+                    {{ __('Or register here') }}
                 </a>
             </div>
         </form>

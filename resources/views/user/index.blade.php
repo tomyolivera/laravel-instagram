@@ -18,24 +18,29 @@
 
     <div class="container">
         <div class="row">
+
             {{-- Profile --}}
-            <div class="{{ $divclass }}">
-                @include('user.edit')
-            </div>
+            {{-- <div class="{{ $divclass }}"> --}}
+                @include('user.profile')
+            {{-- </div> --}}
 
-            {{-- Extras --}}
-            <div class="{{ $divclass }}">
-                @include('user.extras')
-            </div>
-
-            {{-- Change password --}}
-            <div class="{{ $divclass }}">
-                @include('user.change_password')
-            </div>
-
+            @if (Route::has('edit'))
+                {{-- Edit --}}
+                
+                {{-- Extras --}}
+                <div class="{{ $divclass }}">
+                    {{-- @include('user.extras') --}}
+                </div>
+                
+                {{-- Change password --}}
+                <div class="{{ $divclass }}">
+                    {{-- @include('user.change_password') --}}
+                </div>
+            @endif
+            
             {{-- Images --}}
             <div>
-                @include('user.publications')
+                {{-- @include('user.publications') --}}
             </div>
         </div>
     </div>

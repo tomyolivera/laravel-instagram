@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-gray-900 shadow-2xl sticky-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-gray-900 shadow-md sticky-top">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+            {{-- {{ config('app.name', 'Instagram') }} --}}
+            Instagram
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -44,7 +45,7 @@
                                 <div class="dropdown-toggle mt-2"></div>
                             </a>
                         <div class="dropdown-menu dropdown-menu-right bg-gray-800 shadow-xl rounded p-2">
-                            <a class="{{ $aclass }}" href="{{ route('tasks') }}"> {{ __('My Tasks') }} <i class="text-blue-500">tasks</i></a>
+                            <a class="{{ $aclass }}" href="{{ route('tasks.index') }}"> {{ __('My Tasks') }} <i class="text-blue-500">tasks</i></a>
 
                             <a class="{{ $aclass }}" href="{{ route('user') }}"> {{ __('My Profile') }} <i class="text-green-500">account_circle</i></a>
 

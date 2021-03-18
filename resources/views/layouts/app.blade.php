@@ -23,8 +23,9 @@
 
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 </head>
-<body class="bg-gray-900">
+<body class="bg-black">
     <div id="app">
         @include('layouts.header')
 
@@ -46,6 +47,9 @@
 
         // Icons
         $("i").addClass("material-icons mx-2");
+
+        // Cols and Rows
+        $(".col").addClass("col-xs-12 col-sm-12");
 
         // Titles font size: h1, h2...
         for (let i = 1; i <= 6; i++) $("h" + i).addClass("h" + i); 

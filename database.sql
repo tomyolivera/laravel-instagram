@@ -117,7 +117,6 @@ CREATE TABLE IF NOT EXISTS tasks(
     id INT(11) AUTO_INCREMENT NOT NULL,
     user_id INT(11) NOT NULL,
     category_id INT(11) NOT NULL,
-    name VARCHAR(60) NOT NULL,
     description VARCHAR(35),
     created_at DATETIME,
     updated_at DATETIME,
