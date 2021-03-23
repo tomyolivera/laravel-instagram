@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 </head>
-<body class="bg-black">
+<body class="bg-gradient-to-r from-gray-700 to-gray-900">
     <div id="app">
         @include('layouts.header')
 
@@ -54,8 +54,14 @@
         // Titles font size: h1, h2...
         for (let i = 1; i <= 6; i++) $("h" + i).addClass("h" + i); 
 
-        // Buttons
-        $(".button-blue").addClass(`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full border-1 border-gray-300`);
+        // Buttons gradients
+        $(".button").addClass('rounded text-white text-gray-900 px-4 py-2');
+        $(".btn-blue-to-orange").addClass(`bg-gradient-to-r from-blue-500 to-orange-500 hover:from-orange-500 hover:to-blue-500`);
+        $(".btn-red-to-pink").addClass(`bg-gradient-to-r from-red-700 to-pink-300 hover:from-pink-300 hover:to-red-700`);
+        $(".btn-green-to-blue").addClass(`bg-gradient-to-r from-green-500 to-blue-500 hover:from-blue-500 hover:to-green-500`);
+        $(".btn-blue-to-orange").addClass(`bg-gradient-to-r from-blue-500 to-orange-500 hover:from-orange-500 hover:to-blue-500`);
+        $(".btn-blue-to-orange").addClass(`bg-gradient-to-r from-blue-500 to-orange-500 hover:from-orange-500 hover:to-blue-500`);
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

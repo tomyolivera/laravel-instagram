@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Task;
-use App\Models\User;
+use App\Models\CategoryTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class TaskController extends Controller
+class CategoryTaskController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,13 +16,9 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = DB::table('tasks')->where('user_id', Auth::user()->id)->orderBy('category_id', 'ASC')->get();
-        $cat = DB::table('category_tasks')->where('user_id', '=', Auth::user()->id)->get();
-
-        return $request->ajax() 
-                ? ["tasks" => $tasks,
-                    "categories" => $cat]
-                : view('tasks.index');
+        return $request->ajax()
+            ? DB::table('category_tasks')->where('user_id', '=', Auth::user()->id)->get()
+            : view('tasks.index');
     }
 
     /**
@@ -50,12 +39,12 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $task = new Task();
-        $task->description = $request->description;
-        $task->category_id = $request->category_id;
-        $task->user_id = Auth::user()->id;
+        $ct = new CategoryTask();
+        $ct->name = $request->name;
+        $ct->color = $request->color;
+        $ct->user_id = Auth::user()->id;
 
-        return $task->save();
+        return $ct->save();
     }
 
     /**
@@ -89,10 +78,11 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Task::find($id);
-        $task->name = $request->name;
-        $task->description = $request->description;
-        return $task->save();
+        $ct = CategoryTask::find($id);
+        $ct->name = $request->name;
+        $ct->color = $request->color;
+
+        return $ct->save();
     }
 
     /**
@@ -103,6 +93,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        return DB::table('tasks')->where('id', '=', $id)->where('user_id', '=', Auth::user()->id)->delete();
+        DB::table('tasks')->where('category_id', '=', $id)->where('user_id', '=', Auth::user()->id)->delete();
+        return DB::table('category_tasks')->where('id', '=', $id)->where('user_id', '=', Auth::user()->id)->delete();
     }
 }

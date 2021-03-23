@@ -29,6 +29,9 @@ Route::group(['prefix' => "user"], function(){
     Route::get('/photo/{filename}', [App\Http\Controllers\UserController::class, 'getPhoto'])->name('photo');
 });
 
+// Category Tasks
+Route::resource('/categorytasks', App\Http\Controllers\CategoryTaskController::class);
+
 // Tasks
 Route::resource('/tasks', App\Http\Controllers\TaskController::class);
 

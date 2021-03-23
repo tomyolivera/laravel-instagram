@@ -5,11 +5,12 @@
 @endsection
 
 @section('content')
-    <div class="container bg-black text-gray-200 p-0 rounded shadow-xl border-1 border-gray-800">
+    <div class="container rounded shadow-xl bg-black border-1 border-gray-900 text-gray-400">
 
-        <div class="shadow-2xl border-left-0 border-right-0 border-top-0 border-1 border-gray-800 p-3 mb-3 text-center">
+        <div class="p-3 mb-3 text-center">
             <p class="h3">{{ __('Login') }}</p>
             <p class="text-green-500 my-3">{{ __('Complete with your data') }}</p>
+            <hr class="mt-4 bg-white">
         </div>
 
         <form method="POST" action="{{ route('login') }}" class="p-3">
@@ -57,7 +58,7 @@
 
 
             <div class="form-group my-4">
-                <button class="btn btn-outline-success btn-block my-3">{{ __('Login') }}</button>
+                <button class="button btn-green-to-blue my-3 d-block w-100">{{ __('Login') }}</button>
 
                 @if (Route::has('password.request'))
                     <a class="text-yellow-500 hover:text-yellow-500" href="{{ route('password.request') }}">
@@ -66,7 +67,7 @@
                 @endif
                 <br>
                 <a class="text-yellow-500 hover:text-yellow-500" href="{{ route('register') }}">
-                    {{ __('Or register here') }}
+                    {{ __('Register here') }}
                 </a>
             </div>
         </form>
