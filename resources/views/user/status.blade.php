@@ -10,4 +10,4 @@
     @case(2)
         <div class='flex align-center justify-center'><i class='text-yellow-500'>fiber_manual_record</i> <span>{{ __('Busy') }}</span></div>
     @break
-  @endswitch
+@endswitch
