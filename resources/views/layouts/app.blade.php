@@ -16,54 +16,31 @@
     <!-- Styles -->
     <!-- Css -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('css')@show
 
     <!-- Framework -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
     <!-- Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
-<body class="bg-gradient-to-r from-gray-700 to-gray-900">
+{{-- bg-gradient-to-r from-gray-100 to-gray-500 --}}
+<body class="bg-gray-500">
     <div id="app">
         @include('layouts.header')
 
-        <main class="p-4">
+        <main class="my-3">
             @yield('content')
         </main>
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <script>
-        // Form
-        $(".input").addClass(`bg-black text-gray-300 border-1 border-gray-800 appearance-none leading-tight w-full px-4 py-2 rounded
-                                focus:text-gray-300 focus:outline-none focus:border-blue-700`
-                            );
-
-        // Stlyes
-
-        // Icons
-        $("i").addClass("material-icons mx-2");
-
-        // Cols and Rows
-        $(".col").addClass("col-xs-12 col-sm-12");
-
-        // Titles font size: h1, h2...
-        for (let i = 1; i <= 6; i++) $("h" + i).addClass("h" + i); 
-
-        // Buttons gradients
-        $(".button").addClass('rounded text-white text-gray-900 px-4 py-2');
-        $(".btn-blue-to-orange").addClass(`bg-gradient-to-r from-blue-500 to-orange-500 hover:from-orange-500 hover:to-blue-500`);
-        $(".btn-red-to-pink").addClass(`bg-gradient-to-r from-red-700 to-pink-300 hover:from-pink-300 hover:to-red-700`);
-        $(".btn-green-to-blue").addClass(`bg-gradient-to-r from-green-500 to-blue-500 hover:from-blue-500 hover:to-green-500`);
-        $(".btn-blue-to-orange").addClass(`bg-gradient-to-r from-blue-500 to-orange-500 hover:from-orange-500 hover:to-blue-500`);
-        $(".btn-blue-to-orange").addClass(`bg-gradient-to-r from-blue-500 to-orange-500 hover:from-orange-500 hover:to-blue-500`);
-
-    </script>
-
+    <script src="{{ asset('js/main.js') }}"></script>
+    @yield('js')@show
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

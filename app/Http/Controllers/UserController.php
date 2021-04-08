@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,9 +21,13 @@ class UserController extends Controller
         $this->middleware('auth'); 
     }
 
-    public function index()
+    public function index($username)
     {
-        return view('user.index');
+        $users = User::where('username', $username)->get();
+
+        return view('user.index', [
+            'users' => $users
+        ]);
     }
     
     public function update(Request $request)
@@ -36,7 +41,7 @@ class UserController extends Controller
         $email = $request->input('email');
         $status = $request->input('status');
         
-        //If status is not valid, retrun view
+        //If status is not valid, return view
         if($status != 0 && $status != 1 && $status != 2) return redirect('user');
 
         // If user data and form data are equal, return view

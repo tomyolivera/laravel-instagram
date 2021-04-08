@@ -1,32 +1,31 @@
 @extends('layouts.app')
 
-@section('title')
-    {{ __('Login') }}
-@endsection
+@section('title', 'Login')
 
 @section('content')
-    <div class="container rounded shadow-xl bg-black border-1 border-gray-900 text-gray-400">
 
-        <div class="p-3 mb-3 text-center">
-            <p class="h3">{{ __('Login') }}</p>
+    <div class="pic">
+        <div class="p-3 mb-0 text-center">
+            <p class="h2">{{ __('Login') }}</p>
             <p class="text-green-500 my-3">{{ __('Complete with your data') }}</p>
-            <hr class="mt-4 bg-white">
+            <hr class="mt-4" />
         </div>
 
         <form method="POST" action="{{ route('login') }}" class="p-3">
             @csrf
 
             {{-- Email --}}
-            <div class="form-group my-4">
+            <div class="form-group mb-4">
                 <label for="email">{{ __('Email') }}</label>
                 <input type="email" name="email" id="email" class="input" required />
+
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
 
             {{-- Password --}}
             <div class="form-group my-4">
@@ -39,14 +38,9 @@
                     </span>
                 @enderror
             </div>
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
 
             {{-- Extras --}} 
-            <div class="form-group my-4">
+            <div class="form-group">
                 <div class="form-check">
                     <input type="checkbox" name="remember" id="remember" class="form-check-input" {{ old('remember') ? 'checked' : '' }} />
 
@@ -56,20 +50,25 @@
                 </div>
             </div>
 
-
-            <div class="form-group my-4">
-                <button class="button btn-green-to-blue my-3 d-block w-100">{{ __('Login') }}</button>
-
-                @if (Route::has('password.request'))
-                    <a class="text-yellow-500 hover:text-yellow-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot Your Password?') }}
-                    </a>
-                @endif
-                <br>
-                <a class="text-yellow-500 hover:text-yellow-500" href="{{ route('register') }}">
-                    {{ __('Register here') }}
+            @if (Route::has('password.request'))
+                <a class="text-black hover:text-black" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
                 </a>
+            @endif
+
+            <div class="form-group">
+                <button class="button btn_login d-block w-full my-3">{{ __('Login') }}</button>
+                {{-- <button class="btn btn-danger btn-block my-3">Google</button>
+                <button class="btn btn-primary btn-block my-3">Facebook</button> --}}
+
+                <p class="text-center text-gray-600 h6">{{ __('Or') }}</p>
+
+                <a href="{{ route('register') }}" class="text-decoration-none hover:text-black text-center button btn_register d-block w-full my-3">{{ __('Register') }}</a>
             </div>
         </form>
     </div>
 @endsection
+
+@section('js')
+    <script src="{{ asset('js/LoginRegister.js') }}"></script>
+@stop

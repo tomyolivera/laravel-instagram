@@ -23,7 +23,7 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = DB::table('tasks')->where('user_id', Auth::user()->id)->orderBy('category_id', 'ASC')->get();
+        $tasks = DB::table('tasks')->where('user_id', Auth::user()->id)->orderBy('for', 'ASC')->get();
         $cat = DB::table('category_tasks')->where('user_id', '=', Auth::user()->id)->get();
 
         return $request->ajax() 
@@ -53,6 +53,7 @@ class TaskController extends Controller
         $task = new Task();
         $task->description = $request->description;
         $task->category_id = $request->category_id;
+        $task->for = $request->for;
         $task->user_id = Auth::user()->id;
 
         return $task->save();
@@ -92,6 +93,7 @@ class TaskController extends Controller
         $task = Task::find($id);
         $task->name = $request->name;
         $task->description = $request->description;
+        $task->for = $request->for;
         return $task->save();
     }
 

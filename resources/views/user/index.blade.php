@@ -19,31 +19,36 @@
     <div class="container">
         <div class="row">
 
-            {{-- Profile --}}
-            {{-- <div class="{{ $divclass }}"> --}}
-                @include('user.profile')
-            {{-- </div> --}}
+            @foreach ($users as $user)
 
-            @if (Route::has('edit'))
-                {{-- Edit --}}
+                {{-- Profile --}}
+                @include('user.profile')
+
+                {{-- <div class="{{ $divclass }}">
+                    @include('user.edit')
+                </div> --}}
+                @if (Route::has('edit'))
+                    {{-- Edit --}}
+                    
+                    {{-- Extras --}}
+                    <div class="{{ $divclass }}">
+                        {{-- @include('user.extras') --}}
+                    </div>
+                    
+                    {{-- Change password --}}
+                    <div class="{{ $divclass }}">
+                        {{-- @include('user.change_password') --}}
+                    </div>
+                @endif
                 
-                {{-- Extras --}}
-                <div class="{{ $divclass }}">
-                    {{-- @include('user.extras') --}}
+                {{-- Images --}}
+                <div>
+                    {{-- @include('user.publications') --}}
                 </div>
-                
-                {{-- Change password --}}
-                <div class="{{ $divclass }}">
-                    {{-- @include('user.change_password') --}}
-                </div>
-            @endif
-            
-            {{-- Images --}}
-            <div>
-                {{-- @include('user.publications') --}}
-            </div>
+            @endforeach
+
         </div>
     </div>
 
-    <user-component />
+    {{-- <user-component /> --}}
 @endsection

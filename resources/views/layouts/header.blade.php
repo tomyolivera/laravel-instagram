@@ -1,9 +1,7 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-gray-900 shadow-md sticky-top">
+<nav class="navbar navbar-expand-md shadow-md sticky-top bg-gradient-to-r from-teal-400 to-teal-700">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{-- {{ config('app.name', 'Instagram') }} --}}
-            Instagram
-        </a>
+        <a class="h2 text-decoration-none text-white hover:text-white" href="{{ url('/') }}">FACER</a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,43 +16,46 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item">
-                        <a href="{{ route('home') }}" class="nav-link">Home</a>
-                    </li>
+                    {{-- <li class="nav-item">
+                        <a class="h5 text-gray-400 mr-3 text-decoration-none hover:text-gray-200" href="{{ route('home') }}">Home</a>
+                    </li> --}}
 
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="h5 text-gray-400 mr-3 text-decoration-none hover:text-gray-200" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
                     
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="h5 text-gray-400 mr-3 text-decoration-none hover:text-gray-200" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else
-                    <?php $aclass = "dropdown-item text-gray-300 hover:text-gray-300 hover:bg-gray-800 flex align-center" ?>
+                    <?php $aclass = "dropdown-item text-gray-300 bg-gray-800 hover:text-gray-300 hover:bg-gray-700 flex align-center" ?>
 
                     <li class="nav-item dropdown"> 
-                            <a id="navbarDropdown" class="nav-link flex align-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                @include('user.photo')
-                                <div class="m-2">
-                                    {{ Auth::user()->name }}
-                                </div>
-                                <div class="dropdown-toggle mt-2"></div>
-                            </a>
+                        <a id="navbarDropdown" class="nav-link flex align-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            @include('user.photo')
+                            <div class="m-2 text-white">
+                                {{ Auth::user()->name }}
+                            </div>
+                            <div class="dropdown-toggle mt-2 text-white"></div>
+                        </a>
+                        
                         <div class="dropdown-menu dropdown-menu-right bg-gray-800 shadow-xl rounded p-2">
-                            <a class="{{ $aclass }}" href="{{ route('tasks.index') }}"> {{ __('My Tasks') }} <i class="text-blue-500">tasks</i></a>
+                            <a class="{{ $aclass }}" href="{{ route('tasks.index') }}"> <i class="fas fa-tasks text-blue-500"></i> <span>{{ __('My Tasks') }}</span></a>
 
-                            <a class="{{ $aclass }}" href="{{ route('user') }}"> {{ __('My Profile') }} <i class="text-green-500">account_circle</i></a>
+                            <a class="{{ $aclass }}" href="{{ route('publications') }}"> <i class="fas fa-images text-purple-500"></i> <span>{{ __('Publications') }}</span></a>
 
-                            <a class="{{ $aclass }}" href="#"> {{ __('Settings') }} <i class="text-gray-500">settings</i></a>
+                            <a class="{{ $aclass }}" href="{{ route('user', Auth::user()->username ) }}"> <i class="far fa-user text-green-500"></i> <span>{{ __('My Profile') }}</span></a>
+
+                            <a class="{{ $aclass }}" href="#"> <i class="fas fa-cog text-gray-500"></i> <span>{{ __('Settings') }}</span></a>
 
                             <hr class="bg-white" />
 
                             <a class="{{ $aclass }}" href="{{ route('logout') }}"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Logout') }} <i class="text-red-500">logout</i></a>
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="fas fa-long-arrow-alt-left text-red-500"></i> <span>{{ __('Logout') }}</span></a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\TaskController;
-use App\Models\Publication;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,23 +14,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Publications
+Route::get('/', function(){
+    return view('home.index');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => 'publications'], function(){
+    Route::get('/', [App\Http\Controllers\PublicationController::class, 'index'])->name('publications');
+    Route::get('/create', [App\Http\Controllers\PublicationController::class, 'create'])->name('publications.create');
+    Route::post('/store', [App\Http\Controllers\PublicationController::class, 'store'])->name('publications.store');
+    Route::get('/photo/{filename}', [App\Http\Controllers\PublicationController::class, 'getPhoto'])->name('publications.photo');
+    Route::get('/publication/{id}', [App\Http\Controllers\PublicationController::class, 'getPublication'])->name('publications.publication');
+    // Route::post('/like/{id}', [App\Http\Controllers\PublicationController::class, 'like'])->name('publications.like');
+});
 
 // User
 Route::group(['prefix' => "user"], function(){
-    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('user');
-    Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('update');
-    Route::get('/photo/{filename}', [App\Http\Controllers\UserController::class, 'getPhoto'])->name('photo');
+    Route::get('/{username}', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+    Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+    Route::get('/photo/{filename}', [App\Http\Controllers\UserController::class, 'getPhoto'])->name('user.photo');
 });
-
-// Category Tasks
-Route::resource('/categorytasks', App\Http\Controllers\CategoryTaskController::class);
 
 // Tasks
 Route::resource('/tasks', App\Http\Controllers\TaskController::class);
 
+// Category Tasks
+Route::resource('/categorytasks', App\Http\Controllers\CategoryTaskController::class);
+
+// Login & Register
 Auth::routes();

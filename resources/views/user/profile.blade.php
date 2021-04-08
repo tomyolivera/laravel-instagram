@@ -1,32 +1,16 @@
-<div class="row text-gray-300">
-    <div class="col col-md-4">
-        <img style="width:200px; height:200px; border-radius:100%;" src="{{ route('photo', ['filename' => Auth::user()->photo]) }}" />
-    </div>
-
-    <div class="col col-md-8">
+<div class="card">
+    <div class="card-header">
         <div class="flex align-center">
-            <h3 class="d-inline">{{ Auth::user()->username }}</h3>
-            <button class="mx-3 btn btn-primary d-inline">{{ __('Edit profile') }}</button>
-        </div>
-
-        <div class="my-3 row">
-            <div class="col col-md-2">
-                <h6>5 publicaciones</h6>
+            <div>
+                <img class="rounded-full w-full" src="{{ route('user.photo', ['filename' => $user->photo]) }}" />
             </div>
-
-            <div class="col col-md-2">
-                <h6>172 seguidores</h6>
-            </div>
-
-            <div class="col col-md-2">
-                <h6>125 siguiendo</h6>
+            <div class="ml-4">
+                <h4>{{ $user->name }}</h4>
+                <h5>{{ __('@') }}{{ $user->username }}</h5>
+                @include('user.status')
             </div>
         </div>
-        
-        <div class="my-5">
-            <h4>{{ Auth::user()->name }}</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam id doloremque ex magni similique eius quam? Qui numquam, consequatur quod dolores rerum quis nisi atque nostrum sequi dolor a ipsum!</p>
-        </div>
+
     </div>
 </div>
 

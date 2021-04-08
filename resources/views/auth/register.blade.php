@@ -1,22 +1,20 @@
 @extends('layouts.app')
 
-@section('title')
-    {{ __('Register') }}
-@endsection
+@section('title', 'Register')
 
 @section('content')
-    <div class="container bg-black text-gray-200 p-0 rounded shadow-xl border-1 border-gray-800">
-
-        <div class="shadow-2xl border-left-0 border-right-0 border-top-0 border-1 border-gray-800 p-3 mb-3 text-center">
-            <p class="h3">{{ __('Register') }}</p>
-            <p class="text-blue-500 my-3">{{ __('Complete with your data') }}</p>
+    <div class="pic">
+        <div class="p-3 mb-0 text-center">
+            <p class="h2">{{ __('Register') }}</p>
+            <p class="text-green-500 my-3">{{ __('Complete with your data') }}</p>
+            <hr class="mt-4" />
         </div>
 
         <form method="POST" action="{{ route('register') }}" class="p-3">
             @csrf
 
             {{-- Name --}}
-            <div class="form-group my-4">
+            <div class="form-group mb-4">
                 <label for="name">{{ __('Name') }}</label>
                 <input  type="text" 
                         id="name"
@@ -103,12 +101,16 @@
 
             {{-- Extras --}}
             <div class="form-group">
-                <button class="btn btn-outline-success btn-block my-3">{{ __('Register') }}</button>
+                <button class="button btn_register d-block w-full my-3">{{ __('Register') }}</button>
 
-                <a class="text-yellow-500 hover:text-yellow-500" href="{{ route('login') }}">
-                    {{ __('Do you already have an account? Log In!') }}
-                </a>
+                <p class="text-center text-gray-600 h6">{{ __('Or') }}</p>
+
+                <a href="{{ route('login') }}" class="text-decoration-none hover:text-black text-center button btn_login d-block w-full my-3">{{ __('Login') }}</a>
             </div>
         </form>
     </div>
 @endsection
+
+@section('js')
+    <script src="{{ asset('js/LoginRegister.js') }}"></script>
+@stop

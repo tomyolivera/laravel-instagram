@@ -4,14 +4,14 @@
 
     {{-- Photo --}}
     <div class="d-flex justify-center my-3">
-        <img class="w-20 h-20 rounded-full" src="{{ route('photo', ['filename' => Auth::user()->photo]) }}" />
+        <img class="w-20 h-20 rounded-full" src="{{ route('user.photo', ['filename' => Auth::user()->photo]) }}" />
     </div>
 
     {{-- Status --}}
     @include('user.status')
 </div>
 <hr>
-<form method="POST" action="{{ route('update') }}" enctype="multipart/form-data" class="p-3">
+<form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data" class="p-3">
     @csrf  
     
     <div class="form-group">
@@ -85,12 +85,12 @@
         <label for="status">{{ __('Status') }}</label>
         <select name="status"
                 id="status"
-                class="input @error('status') is-invalid @enderror"
+                class="text-white input @error('status') is-invalid @enderror"
                 autocomplete="off"
                 required>
-            <option value="0" @if (Auth::user()->status == 0) selected @endif>{{ __('Offline') }}</option>
-            <option value="1" @if (Auth::user()->status == 1) selected @endif>{{ __('Online') }}</option>
-            <option value="2" @if (Auth::user()->status == 2) selected @endif>{{ __('Busy') }}</option>
+            <option class="bg-gray-800" value="0" @if (Auth::user()->status == 0) selected @endif>{{ __('Offline') }}</option>
+            <option class="bg-gray-800" value="1" @if (Auth::user()->status == 1) selected @endif>{{ __('Online') }}</option>
+            <option class="bg-gray-800" value="2" @if (Auth::user()->status == 2) selected @endif>{{ __('Busy') }}</option>
         </select>
 
         @error('status')

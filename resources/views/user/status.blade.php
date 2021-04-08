@@ -1,13 +1,13 @@
-@switch(Auth::user()->status)
+@switch($user->status)
     @case(0)
-        <div class='flex align-center justify-center'><i class='text-gray-500'>fiber_manual_record</i> <span>{{ __('Offline') }}</span></div>
+        <div class='text-gray-500'><i class='far fa-circle font-weight-bold'></i> <span>{{ __('Offline') }}</span></div>
     @break
 
     @case(1)
-        <div class='flex align-center justify-center'><i class='text-green-500'>fiber_manual_record</i> <span>{{ __('Online') }}</span></div>
+        <div class='text-green-500'><i class='far fa-circle font-weight-bold'></i> <span>{{ __('Online') }}</span></div>
     @break
     
     @case(2)
-        <div class='flex align-center justify-center'><i class='text-yellow-500'>fiber_manual_record</i> <span>{{ __('Busy') }}</span></div>
+        <div class='text-yellow-500'><i class='far fa-circle font-weight-bold'></i> <span>{{ __('Busy') }}</span></div>
     @break
 @endswitch
