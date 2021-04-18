@@ -65,7 +65,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <p>Sitio en proceso con el fin de practicar y aprender Laravel y Vue JS</p>
 <p>Es un sitio en el que podés tener tus tareas, publicar imágenes, ver las imágenes de otros e interactuar con ellas.</p>
 
-<h3>Versiones</h3>
+<h3 style="margin-top:10px;">Versiones</h3>
 <hr>
 <h5>Version 5.0</h5>
 <ul>
@@ -90,7 +90,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <p>Principalmente se utiliza PHP, JavaScript y SQL</p>
 <ul>
     <li><p>PHP 8 - <a href="https://laravel.com">Laravel 8</a></p></li>
-    <li><p>JavaScript - Vue JS</p></li>
+    <li><p>JavaScript - <a href="https://vuejs.org/">Vue JS</a></p></li>
     <li><p>SQL - Eloquent</p></li>
     <li><p>Blade</p></li>
     <li><p>Bootstrap 5 & Tailwind CSS</p></li>
