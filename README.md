@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -59,4 +59,25 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
+
+<h1>FACER</h1>
+<hr>
+<p>Sitio en proceso con el fin de practicar y aprender Laravel y Vue JS</p>
+<p>Es un sitio en el que podés tener tus tareas, publicar imágenes, ver las imágenes de otros e interactuar con ellas.</p>
+<h3>Cómo utilizarlo</h3>
+<hr>
+<p>Para poder ejecutar este proyecto se deben utilizar los siguientes comandos en la consola:</p>
+<ul>
+    <li><p>php artisan serve</p></li>
+    <li><p>npm run watch</p></li>
+</ul>
+<h3>Tecnologías implementadas</h3>
+<p>Principalmente se utiliza PHP, JavaScript y SQL</p>
+<ul>
+    <li><p>PHP - Laravel</p></li>
+    <li><p>JavaScript - Vue JS</p></li>
+    <li><p>SQL - Eloquent</p></li>
+    <li><p>Blade</p></li>
+    <li><p>Bootstrap 5 & Tailwind CSS</p></li>
+</ul>
