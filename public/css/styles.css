@@ -82,8 +82,9 @@ body.dark{
 }
 
 .list-group-item-dark-mod.dark{
-    color: var(--gray);
+    color: var(--gray) !important;
     background-color: var(--dark) !important;
+    border: none;
 }
 
 .list-group-item-dark-mod.list-group-item-action:hover,
@@ -99,12 +100,19 @@ body.dark{
 }
 
 .list-group-item-dark-mod.list-group-item-action.active {
-    color: #fff;
-    background-color: #000000;
-    border-color: #000000;
+    background: black;
+    color: white;
+    border: none;
 }
 
 .list-group-item-dark-mod.list-group-item-action.active.dark{
-    color: white !important;
-    background-color: var(--blue-dark) !important;
+    background-color: #1f252e !important;
+    border-left: 2px solid var(--green);
+}
+
+/* Buttons */
+.button-green.disabled,
+.button-green:disabled{
+    color:white !important;
+    background-color:gray !important;
 }

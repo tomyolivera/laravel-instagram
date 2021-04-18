@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     private const UPDATED_SUCCESS = "Data updated successfully";
+    private const ERR_UPDATED = "Something went wrong!";
 
     public function __construct()
     {
@@ -34,12 +35,12 @@ class UserController extends Controller
         $user = Auth::user();
 
         // Validate fields
-        $this->validate($request, [
-            'name' => ['required', 'string', 'min:3', 'max:30'],
-            'username' => ['required', 'string', 'min:6', 'max:35', 'unique:users,username,' . $user->id],
-            'email' => ['required', 'email', 'max:150', 'unique:users,email,' . $user->id],
-            'status' => ['required']
-        ]);
+        // $validate = $this->validate($request, [
+        //     'name' => ['required', 'string', 'min:3', 'max:30'],
+        //     'username' => ['required', 'string', 'min:6', 'max:35', 'unique:users,username,' . $user->id],
+        //     'email' => ['required', 'email', 'unique:users,email,' . $user->id],
+        //     'status' => ['required']
+        // ]);
 
         // Get & Set request data
         $user->name = $request->name;
@@ -49,7 +50,7 @@ class UserController extends Controller
         
         // Update table
         $user->update();
-
+        
         return new Response(self::UPDATED_SUCCESS);
     }
 
@@ -71,6 +72,10 @@ class UserController extends Controller
 
     public function updatePhoto(Request $request)
     {
+        $this->validate($request, [
+            'photo' => ['required', 'image']
+        ]);
+
         $user = Auth::user();
 
         // Set / Update image

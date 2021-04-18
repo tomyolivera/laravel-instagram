@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="mb-4">My Profile</h1>
         
-        <div class="picture w-1/2 flex justify-between">
+        <div class="picture sm:w-full md:w-full lg:w-3/4 xl:w-1/2 flex justify-between">
             <div>
                 <h3>{{ user.name }}</h3>
                 <div>
@@ -19,7 +19,7 @@
 
         <div class="row mt-3">
             <div class="col-sm-12 col-md-4 mb-3">
-                <div class="list-group sticky-top">
+                <div class="list-group sticky-top z-0">
                     <a class="list-group-item list-group-item-dark-mod list-group-item-action active" data-bs-toggle="list" href="#list-general">General</a>
                     <a class="list-group-item list-group-item-dark-mod list-group-item-action" data-bs-toggle="list" href="#list-edit">Edit</a>
                     <a class="list-group-item list-group-item-dark-mod list-group-item-action" data-bs-toggle="list" href="#list-security">Security</a>
@@ -61,7 +61,7 @@
         methods: {
             setUser(user){
                 axios.get('/user').then((res) => {
-                    Store.methods.getPhoto(res.data.user.photo, user);
+                    user.photo = Store.methods.getPhoto(res.data.user.photo, user);
                     user.name = res.data.user.name;
                     user.username = res.data.user.username;
                     user.created_at = res.data.user.created_at;
@@ -69,9 +69,6 @@
                     user.status = res.data.user.status;
                     user.dark_mode = res.data.user.dark_mode;
                     Store.methods.isDark(user.dark_mode);
-
-                    return "hola";
-                    return user;
                 });
             }
         }

@@ -9,6 +9,13 @@
             <table class="my-3 table">
                 <tbody>
                     <tr>
+                        <td>Avatar:</td>
+                        <td>
+                            <img class="rounded-full h-10 w-10" :src="user.photo">
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td>Name:</td>
                         <td>
                             <p  class="cursor-pointer"
@@ -62,20 +69,11 @@
     
     export default {
         props: ['user'],
-        data(){
-            return {
-                photo: '',
-            }
-        },
         methods: {
             copy(id){
                 Store.methods.copyToClipBoard(id);
                 Store.methods.showMsg("copy", "The data was copied to the clipboard!");
-            }
+            },
         }
     }
 </script>
-
-<style>
-
-</style>

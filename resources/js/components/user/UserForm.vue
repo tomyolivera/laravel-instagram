@@ -16,8 +16,8 @@
                             v-model="user_edit.name"
                             class="input"
                             autocomplete="off"
-                            minlength="3"
-                            maxlength="30"
+                            :minlength="valid.MIN_NAME"
+                            :maxlength="valid.MAX_NAME"
                             required />
                 </div>
                 
@@ -30,8 +30,8 @@
                             v-model="user_edit.username"
                             class="input"
                             autocomplete="off"
-                            minlength="6"
-                            maxlength="35"
+                            :minlength="valid.MIN_USERNAME"
+                            :maxlength="valid.MAX_USERNAME"
                             required />
                 </div>
 
@@ -112,6 +112,12 @@
                     created_at: 0,
                     status: 0,
                     dark_mode: false
+                },
+                valid: {
+                    MIN_NAME: 3,
+                    MAX_NAME: 30,
+                    MIN_USERNAME: 6,
+                    MAX_USERNAME: 35,
                 }
             }
         },
@@ -122,6 +128,13 @@
             getImage(e){
                 let file = e.target.files[0];
                 this.user_edit.photo = file;
+                if(!Store.methods.isImage(file.type)){
+                    Store.methods.showMsg("fast_photo", "Select an image!", false)
+                    Store.methods.statusBtn("save_photo", "Select an image!", false)
+                    return;
+                }
+                Store.methods.statusBtn("save_photo", "Save", true)
+                Store.methods.showMsg("fast_photo", "", false)
                 this.loadImage(file);
             },
             loadImage(file){
@@ -133,21 +146,26 @@
 
                 reader.readAsDataURL(file);
             },
+            validFields(){
+                return  this.user.name.length > this.valid.MIN_NAME &&
+                        this.user.name.length < this.valid.MAX_NAME &&
+                        this.user.username.length > this.valid.MIN_USERNAME &&
+                        this.user.username.length < this.valid.MAX_USERNAME
+            },
             update(){
                 Store.methods.statusBtn('save_data', 'Saving...', false);
                 Store.methods.showMsg("fast_data");
 
-                try{
-                    axios.post('/user/update', this.user_edit).then((res) => {
-                        Store.methods.statusBtn('save_data', 'Save', true);
-                        Store.methods.showMsg("fast_data", res.data);
+                axios.post('/user/update', this.user_edit).then((res) => {
+                    console.log(res);
+                    Store.methods.statusBtn('save_data', 'Save', true);
+                    Store.methods.showMsg("fast_data", res.data);
 
-                        this.user.name = this.user_edit.name;
-                        this.user.username = this.user_edit.username;
-                        this.user.email = this.user_edit.email;
-                        this.user.status = this.user_edit.status;
-                    });
-                }catch(e){}
+                    this.user.name = this.user_edit.name;
+                    this.user.username = this.user_edit.username;
+                    this.user.email = this.user_edit.email;
+                    this.user.status = this.user_edit.status;
+                });
             },
             updatePhoto(){
                 Store.methods.statusBtn('save_photo', 'Saving...', false);

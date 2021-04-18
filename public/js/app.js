@@ -1883,7 +1883,11 @@ __webpack_require__.r(__webpack_exports__);
     getPhoto: function getPhoto(photo, obj) {
       axios.get("/user/photo/".concat(photo)).then(function (res) {
         obj.photo = res.config.url;
+        return obj.photo;
       });
+    },
+    isImage: function isImage(type) {
+      return type == "image/jpeg" || type == "image/jpg" || type == "image/png";
     }
   }
 });
@@ -2133,7 +2137,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getTasks();
-    _user_User__WEBPACK_IMPORTED_MODULE_1__.default.methods.getUser(this.user);
+    _user_User__WEBPACK_IMPORTED_MODULE_1__.default.methods.setUser(this.user);
   },
   methods: {
     getTasks: function getTasks() {
@@ -2466,14 +2470,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['user'],
-  data: function data() {
-    return {
-      photo: ''
-    };
-  },
   methods: {
     copy: function copy(id) {
       _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.copyToClipBoard(id);
@@ -2674,7 +2680,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setUser: function setUser(user) {
       axios.get('/user').then(function (res) {
-        _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.getPhoto(res.data.user.photo, user);
+        user.photo = _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.getPhoto(res.data.user.photo, user);
         user.name = res.data.user.name;
         user.username = res.data.user.username;
         user.created_at = res.data.user.created_at;
@@ -2682,8 +2688,6 @@ __webpack_require__.r(__webpack_exports__);
         user.status = res.data.user.status;
         user.dark_mode = res.data.user.dark_mode;
         _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.isDark(user.dark_mode);
-        return "hola";
-        return user;
       });
     }
   }
@@ -2816,6 +2820,12 @@ __webpack_require__.r(__webpack_exports__);
         created_at: 0,
         status: 0,
         dark_mode: false
+      },
+      valid: {
+        MIN_NAME: 3,
+        MAX_NAME: 30,
+        MIN_USERNAME: 6,
+        MAX_USERNAME: 35
       }
     };
   },
@@ -2826,6 +2836,15 @@ __webpack_require__.r(__webpack_exports__);
     getImage: function getImage(e) {
       var file = e.target.files[0];
       this.user_edit.photo = file;
+
+      if (!_Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.isImage(file.type)) {
+        _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.showMsg("fast_photo", "Select an image!", false);
+        _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.statusBtn("save_photo", "Select an image!", false);
+        return;
+      }
+
+      _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.statusBtn("save_photo", "Save", true);
+      _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.showMsg("fast_photo", "", false);
       this.loadImage(file);
     },
     loadImage: function loadImage(file) {
@@ -2839,22 +2858,23 @@ __webpack_require__.r(__webpack_exports__);
 
       reader.readAsDataURL(file);
     },
+    validFields: function validFields() {
+      return this.user.name.length > this.valid.MIN_NAME && this.user.name.length < this.valid.MAX_NAME && this.user.username.length > this.valid.MIN_USERNAME && this.user.username.length < this.valid.MAX_USERNAME;
+    },
     update: function update() {
       var _this2 = this;
 
       _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.statusBtn('save_data', 'Saving...', false);
       _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.showMsg("fast_data");
-
-      try {
-        axios.post('/user/update', this.user_edit).then(function (res) {
-          _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.statusBtn('save_data', 'Save', true);
-          _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.showMsg("fast_data", res.data);
-          _this2.user.name = _this2.user_edit.name;
-          _this2.user.username = _this2.user_edit.username;
-          _this2.user.email = _this2.user_edit.email;
-          _this2.user.status = _this2.user_edit.status;
-        });
-      } catch (e) {}
+      axios.post('/user/update', this.user_edit).then(function (res) {
+        console.log(res);
+        _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.statusBtn('save_data', 'Save', true);
+        _Store__WEBPACK_IMPORTED_MODULE_0__.default.methods.showMsg("fast_data", res.data);
+        _this2.user.name = _this2.user_edit.name;
+        _this2.user.username = _this2.user_edit.username;
+        _this2.user.email = _this2.user_edit.email;
+        _this2.user.status = _this2.user_edit.status;
+      });
     },
     updatePhoto: function updatePhoto() {
       var _this3 = this;
@@ -39952,6 +39972,17 @@ var render = function() {
       _c("table", { staticClass: "my-3 table" }, [
         _c("tbody", [
           _c("tr", [
+            _c("td", [_vm._v("Avatar:")]),
+            _vm._v(" "),
+            _c("td", [
+              _c("img", {
+                staticClass: "rounded-full h-10 w-10",
+                attrs: { src: _vm.user.photo }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
             _c("td", [_vm._v("Name:")]),
             _vm._v(" "),
             _c("td", [
@@ -40232,32 +40263,39 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("h1", { staticClass: "mb-4" }, [_vm._v("My Profile")]),
     _vm._v(" "),
-    _c("div", { staticClass: "picture w-1/2 flex justify-between" }, [
-      _c("div", [
-        _c("h3", [_vm._v(_vm._s(_vm.user.name))]),
+    _c(
+      "div",
+      {
+        staticClass:
+          "picture sm:w-full md:w-full lg:w-3/4 xl:w-1/2 flex justify-between"
+      },
+      [
+        _c("div", [
+          _c("h3", [_vm._v(_vm._s(_vm.user.name))]),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("p", [_vm._v(_vm._s(_vm.user.email))]),
+              _vm._v(" "),
+              _c("p", { staticClass: "mt-2" }, [
+                _vm._v("Created at " + _vm._s(_vm.user.created_at))
+              ]),
+              _vm._v(" "),
+              _c("user-status", { attrs: { status: _vm.user.status } })
+            ],
+            1
+          )
+        ]),
         _vm._v(" "),
-        _c(
-          "div",
-          [
-            _c("p", [_vm._v(_vm._s(_vm.user.email))]),
-            _vm._v(" "),
-            _c("p", { staticClass: "mt-2" }, [
-              _vm._v("Created at " + _vm._s(_vm.user.created_at))
-            ]),
-            _vm._v(" "),
-            _c("user-status", { attrs: { status: _vm.user.status } })
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("img", {
-          staticClass: "rounded-full h-20 w-20",
-          attrs: { src: _vm.user.photo }
-        })
-      ])
-    ]),
+        _c("div", [
+          _c("img", {
+            staticClass: "rounded-full h-20 w-20",
+            attrs: { src: _vm.user.photo }
+          })
+        ])
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "row mt-3" }, [
       _vm._m(0),
@@ -40296,7 +40334,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-12 col-md-4 mb-3" }, [
-      _c("div", { staticClass: "list-group sticky-top" }, [
+      _c("div", { staticClass: "list-group sticky-top z-0" }, [
         _c(
           "a",
           {
@@ -40386,8 +40424,8 @@ var render = function() {
                 id: "name",
                 name: "name",
                 autocomplete: "off",
-                minlength: "3",
-                maxlength: "30",
+                minlength: _vm.valid.MIN_NAME,
+                maxlength: _vm.valid.MAX_NAME,
                 required: ""
               },
               domProps: { value: _vm.user_edit.name },
@@ -40420,8 +40458,8 @@ var render = function() {
                 id: "username",
                 name: "username",
                 autocomplete: "off",
-                minlength: "6",
-                maxlength: "35",
+                minlength: _vm.valid.MIN_USERNAME,
+                maxlength: _vm.valid.MAX_USERNAME,
                 required: ""
               },
               domProps: { value: _vm.user_edit.username },

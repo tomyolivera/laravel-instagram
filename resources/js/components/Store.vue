@@ -37,8 +37,14 @@
             getPhoto(photo, obj){
                 axios.get(`/user/photo/${photo}`).then((res) => {
                     obj.photo = res.config.url;
+                    return obj.photo;
                 });
             },
+            isImage(type){
+                return  type == "image/jpeg" ||
+                        type == "image/jpg" || 
+                        type == "image/png";
+            }
         }
     }
 </script>

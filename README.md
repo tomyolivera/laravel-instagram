@@ -62,20 +62,34 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
 
 <h1>FACER</h1>
-<hr>
 <p>Sitio en proceso con el fin de practicar y aprender Laravel y Vue JS</p>
 <p>Es un sitio en el que podés tener tus tareas, publicar imágenes, ver las imágenes de otros e interactuar con ellas.</p>
+
+<h3>Versiones</h3>
+<hr>
+<h5>Version 5.0</h5>
+<ul>
+    <li>
+        <p>Se realizan grandes cambios en la interfaz del usuario.</p>
+    </li>
+    <li>
+        <p>Se implementa el modo oscuro (Beta - En proceso). Se puede utilizar cuando   tenés tu cuenta </p>
+    </li>
+</ul>
+
 <h3>Cómo utilizarlo</h3>
 <hr>
 <p>Para poder ejecutar este proyecto se deben utilizar los siguientes comandos en la consola:</p>
 <ul>
     <li><p>php artisan serve</p></li>
-    <li><p>npm run watch</p></li>
+    <li><p>npm run watch - (Tener instalado Node JS)</p></li>
 </ul>
+
 <h3>Tecnologías implementadas</h3>
+<hr>
 <p>Principalmente se utiliza PHP, JavaScript y SQL</p>
 <ul>
-    <li><p>PHP - Laravel</p></li>
+    <li><p>PHP 8 - <a href="https://laravel.com">Laravel 8</a></p></li>
     <li><p>JavaScript - Vue JS</p></li>
     <li><p>SQL - Eloquent</p></li>
     <li><p>Blade</p></li>

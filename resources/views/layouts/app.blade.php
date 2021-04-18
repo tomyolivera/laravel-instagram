@@ -27,13 +27,12 @@
     {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
-{{-- bg-gradient-to-r from-gray-100 to-gray-500 --}}
 <body class="bg-gray-200">
     <div id="app">
-        {{-- @include('layouts.loading') --}}
+        @include('layouts.loading')
 
         @include('layouts.header')
-
+        
         <main class="my-3">
             @yield('content')
         </main>
@@ -41,7 +40,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/styles.js') }}"></script>
     @yield('js')@show
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

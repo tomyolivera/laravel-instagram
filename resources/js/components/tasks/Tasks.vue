@@ -43,7 +43,7 @@ export default {
     },
     created(){
         this.getTasks();
-        User.methods.getUser(this.user);
+        User.methods.setUser(this.user);
     },
     methods: {
         getTasks(){
