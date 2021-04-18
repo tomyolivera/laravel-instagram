@@ -11,13 +11,13 @@
 
                 <div class="my-3">
                     <p class="text-black">
-                        For: <span class="text-gray-600">{{ formatDate(item.for )}}</span>
+                        For: <span class="text-gray-600">{{ formatDate(item.for_)}}</span>
                     </p>
                 </div>
 
                 <p class="mt-3 flex align-center">
-                    <button class="btn btn-warning flex align-center"><i class="material-icons">edit</i></button>
-                    <button class="btn btn-danger flex align-center mx-2" @click="destroy(item, id)"><i class="material-icons">delete</i></button>
+                    <button class="btn btn-warning flex align-center"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger flex align-center mx-2" @click="destroy(item, id)"><i class="fas fa-trash"></i></button>
                 </p>
             </div>
         </div>
@@ -27,11 +27,6 @@
 <script>
     export default {
         name: 'Task',
-        data(){
-            return{
-                
-            }
-        },
         props: ['tasks'],
         methods: {
             formatDate(date){
@@ -47,19 +42,3 @@
         }
     }
 </script>
-
-<style>
-    .desc::-webkit-scrollbar {
-        -webkit-appearance: none;
-    }
-
-    .desc::-webkit-scrollbar:vertical {
-        width:6px;
-    }
-
-    .desc::-webkit-scrollbar-thumb {
-        background-color: #797979;
-        border-radius: 10px;
-        border: 1px solid #f1f2f3;
-    }
-</style>

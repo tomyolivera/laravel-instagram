@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -14,74 +15,73 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    private const UPDATED_SUCCESS = "The data was updated successfully";
+    private const UPDATED_SUCCESS = "Data updated successfully";
 
     public function __construct()
     {
-        $this->middleware('auth'); 
+        $this->middleware('auth');
     }
 
-    public function index($username)
+    public function index(Request $request)
     {
-        $users = User::where('username', $username)->get();
-
-        return view('user.index', [
-            'users' => $users
-        ]);
+        return $request->ajax() 
+                ? ["user" => Auth::user()]
+                : view('user.index');
     }
-    
+
     public function update(Request $request)
     {
-        // Get user data
         $user = Auth::user();
-
-        // Get request data
-        $name = $request->input('name');
-        $username = $request->input('username');
-        $email = $request->input('email');
-        $status = $request->input('status');
-        
-        //If status is not valid, return view
-        if($status != 0 && $status != 1 && $status != 2) return redirect('user');
-
-        // If user data and form data are equal, return view
-        if( ($status == $user->status) && ($name == $user->name) && ($username == $user->username) && ($email == $user->email) ) return redirect('user');
 
         // Validate fields
         $this->validate($request, [
-            'name' => ['required', 'string', 'min:3', 'max:60'],
+            'name' => ['required', 'string', 'min:3', 'max:30'],
             'username' => ['required', 'string', 'min:6', 'max:35', 'unique:users,username,' . $user->id],
             'email' => ['required', 'email', 'max:150', 'unique:users,email,' . $user->id],
             'status' => ['required']
         ]);
-        
-        // Set / Update image
-        $photo = $request->file('photo');
 
-        if($photo){
-            $photo_name = time() . $photo->getClientOriginalName();
-
-            Storage::disk('users')->put($photo_name, File::get($photo));
-
-            $user->photo = $photo_name;
-        }
-        
-        $user->name = $name;
-        $user->username = $username;
-        $user->email = $email;
-        $user->status = $status;
+        // Get & Set request data
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->status = $request->status;
         
         // Update table
         $user->update();
 
-        // Redirect to "My Profile"
-        return redirect('user')->with('success', self::UPDATED_SUCCESS);
+        return new Response(self::UPDATED_SUCCESS);
+    }
+
+    public function setDarkMode(Request $request)
+    {
+        $user = Auth::user();
+        $user->dark_mode = $request->darkMode;
+
+        $user->update();
+
+        return new Response(self::UPDATED_SUCCESS);
     }
 
     public function getPhoto($filename)
     {
         $file = Storage::disk('users')->get($filename);
         return new Response($file, 200);
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $user = Auth::user();
+
+        // Set / Update image
+        $photo = $request->photo;
+        $photo_name = time() . $photo->getClientOriginalName();
+        Storage::disk('users')->put($photo_name, File::get($photo));
+        
+        $user->photo = $photo_name;
+        $user->update();
+
+        return new Response(["msg" => self::UPDATED_SUCCESS, "photo_name" => $user->photo]);
     }
 
 }

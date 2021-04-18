@@ -24,7 +24,7 @@
     position: fixed;
 
     color: white;
-    background-color: rgb(243, 88, 88);
+    background-color: rgb(228, 27, 27);
     width:var(--size);
     height:var(--size);
     padding: 12px;
@@ -35,7 +35,7 @@
 
     border-radius: 100%;
     box-shadow: var(--shadow);
-}.btn1:hover{ background-color: rgba(243, 88, 88, 0.699); }
+}.btn1:hover{ background-color: rgb(230, 55, 55);}
 
 .btn2{
     user-select: none;
@@ -47,7 +47,7 @@
     position: fixed;
 
     color: white;
-    background-color: rgb(87, 199, 87);
+    background-color: rgb(39, 202, 39);
     width:var(--size);
     height:var(--size);
 
@@ -58,7 +58,7 @@
     
     border-radius: 100%;
     box-shadow: var(--shadow);
-}.btn2:hover{ background-color: rgba(46, 165, 46, 0.644); }
+}.btn2:hover{ background-color: rgb(23, 177, 23); }
 
 .btn3{
     user-select: none;
@@ -81,4 +81,4 @@
     
     border-radius: 100%;
     box-shadow: var(--shadow);
-}.btn3:hover{ background-color: rgba(72, 72, 235, 0.712); }
+}.btn3:hover{ background-color: rgb(26, 26, 173); }

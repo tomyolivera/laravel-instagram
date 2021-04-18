@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users(
     email VARCHAR(150) NOT NULL,
     password VARCHAR(255),
     status INT(1) NOT NULL DEFAULT 0,
+    dark_mode BOOLEAN,
     role VARCHAR(20) NOT NULL DEFAULT 'user',
     photo VARCHAR(500) NOT NULL DEFAULT 'nophoto.png',
     created_at DATETIME,
@@ -99,6 +100,7 @@ CREATE TABLE IF NOT EXISTS tasks(
     user_id INT(11) NOT NULL,
     category_id INT(11) NOT NULL,
     description VARCHAR(35),
+    for_ DATE NOT NULL
     created_at DATETIME,
     updated_at DATETIME,
 

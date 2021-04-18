@@ -16,6 +16,7 @@
     <!-- Styles -->
     <!-- Css -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     @yield('css')@show
 
     <!-- Framework -->
@@ -27,8 +28,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 </head>
 {{-- bg-gradient-to-r from-gray-100 to-gray-500 --}}
-<body class="bg-gray-500">
+<body class="bg-gray-200">
     <div id="app">
+        {{-- @include('layouts.loading') --}}
+
         @include('layouts.header')
 
         <main class="my-3">

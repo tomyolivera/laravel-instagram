@@ -1,38 +1,52 @@
 <template>
-    <div class="container text-gray-300">
-        <p class="text-black h3">Tasks</p>
+    <div>
+        <div class="picture container">
+            <div class="row">
+                <div class="col col-md-5">
+                    <Categories />
+                </div>
 
-        <div class="flex align-center">
-            <NewTask :tasks="tasks" :categories="categories" />
-            <!-- <DeleteAllTasks :tasks="tasks" /> -->
+                <div class="col col-md-7">
+                    <h3>Tasks</h3>
+
+                    <div class="flex align-center">
+                        <NewTask :tasks="tasks" :categories="categories" />
+                        <!-- <DeleteAllTasks :tasks="tasks" /> -->
+                    </div>
+
+                    <Task :tasks="tasks" />
+                </div>
+            </div>
         </div>
 
-        <Task :tasks="tasks" />
-
+        <div class="btns">
+            <div class="btn1"><i class="fas fa-plus"></i></div>
+            <button type="button" class="btn2 hidden" data-bs-toggle="modal" data-bs-target="#addTask"><i class="fas fa-tasks"></i></button>
+            <button type="button" class="btn3 hidden" data-bs-toggle="modal" data-bs-target="#addCategory"><i class="fas fa-wallet"></i></button>
+        </div>
     </div>
 </template>
 
 <script>
-import Task from './Task.vue';
+
+import Store from '../Store';
+import User from '../user/User';
 
 export default {
-  components: { Task },
     name: 'Tasks',
     data(){
         return{
             categories: [],
             tasks: [],
+            user: User.data().user,
         }
     },
     created(){
-        this.get();
-
-        setInterval(() => {
-            this.get();
-        }, 1000);
+        this.getTasks();
+        User.methods.getUser(this.user);
     },
     methods: {
-        get(){
+        getTasks(){
             axios.get("/tasks").then( res => {
                 this.tasks = res.data['tasks'];
                 this.categories = res.data['categories'];

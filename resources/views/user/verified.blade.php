@@ -1,0 +1,1 @@
+@if($v) <i class="text-blue-500 fas fa-check-circle" title="Verified account"></i> @endif

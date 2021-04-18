@@ -1,9 +1,9 @@
 $(".btn1").mouseover(function(){
-    $(".btn_add_category").show(250);
-    $(".btn_add_task").show(500)
+    $(".btn2").show(250);
+    $(".btn3").show(500)
 });
 
 $(".btns").mouseleave(function(){
-    $(".btn_add_task").hide(250);
-    $(".btn_add_category").hide(700);
+    $(".btn3").hide(250);
+    $(".btn2").hide(700);
 });

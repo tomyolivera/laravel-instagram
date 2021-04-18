@@ -10,13 +10,4 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function vardump($data)
-    {
-        echo "<pre>";
-        var_dump($data);
-        echo "</pre>";
-        
-        die();
-    }
 }

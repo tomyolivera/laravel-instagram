@@ -23,7 +23,7 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = DB::table('tasks')->where('user_id', Auth::user()->id)->orderBy('for', 'ASC')->get();
+        $tasks = DB::table('tasks')->where('user_id', Auth::user()->id)->orderBy('for_', 'asc')->get();
         $cat = DB::table('category_tasks')->where('user_id', '=', Auth::user()->id)->get();
 
         return $request->ajax() 
@@ -32,14 +32,11 @@ class TaskController extends Controller
                 : view('tasks.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function valid(Request $request)
     {
-        //
+        return $this->validate($request, [
+            'description' => ['max:800']
+        ]);
     }
 
     /**
@@ -53,32 +50,10 @@ class TaskController extends Controller
         $task = new Task();
         $task->description = $request->description;
         $task->category_id = $request->category_id;
-        $task->for = $request->for;
+        $task->for_ = $request->for;
         $task->user_id = Auth::user()->id;
 
         return $task->save();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

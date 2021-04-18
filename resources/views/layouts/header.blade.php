@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md shadow-md sticky-top bg-gradient-to-r from-teal-400 to-teal-700">
+<nav class="navbar navbar-expand-md shadow-md bg-gray-900">
     <div class="container">
         <a class="h2 text-decoration-none text-white hover:text-white" href="{{ url('/') }}">FACER</a>
 
@@ -16,10 +16,6 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                    {{-- <li class="nav-item">
-                        <a class="h5 text-gray-400 mr-3 text-decoration-none hover:text-gray-200" href="{{ route('home') }}">Home</a>
-                    </li> --}}
-
                     @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="h5 text-gray-400 mr-3 text-decoration-none hover:text-gray-200" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -32,7 +28,7 @@
                         </li>
                     @endif
                 @else
-                    <?php $aclass = "dropdown-item text-gray-300 bg-gray-800 hover:text-gray-300 hover:bg-gray-700 flex align-center" ?>
+                    <?php $aclass = "dropdown-item text-gray-300 bg-gray-900 hover:text-gray-300 hover:bg-gray-700 flex align-center" ?>
 
                     <li class="nav-item dropdown"> 
                         <a id="navbarDropdown" class="nav-link flex align-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -43,12 +39,12 @@
                             <div class="dropdown-toggle mt-2 text-white"></div>
                         </a>
                         
-                        <div class="dropdown-menu dropdown-menu-right bg-gray-800 shadow-xl rounded p-2">
+                        <div class="dropdown-menu dropdown-menu-right bg-gray-900 shadow-xl rounded p-2">
                             <a class="{{ $aclass }}" href="{{ route('tasks.index') }}"> <i class="fas fa-tasks text-blue-500"></i> <span>{{ __('My Tasks') }}</span></a>
 
                             <a class="{{ $aclass }}" href="{{ route('publications') }}"> <i class="fas fa-images text-purple-500"></i> <span>{{ __('Publications') }}</span></a>
 
-                            <a class="{{ $aclass }}" href="{{ route('user', Auth::user()->username ) }}"> <i class="far fa-user text-green-500"></i> <span>{{ __('My Profile') }}</span></a>
+                            <a class="{{ $aclass }}" href="{{ route('user') }}"> <i class="far fa-user text-green-500"></i> <span>{{ __('My Profile') }}</span></a>
 
                             <a class="{{ $aclass }}" href="#"> <i class="fas fa-cog text-gray-500"></i> <span>{{ __('Settings') }}</span></a>
 

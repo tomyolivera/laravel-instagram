@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Publication;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -20,14 +21,24 @@ class PublicationController extends Controller
     {
         $publications = Publication::orderBy('id', 'desc')->get();
 
+        $latestComments = [];
+
+        foreach ($publications as $publication) {
+            for ($i=0; $i < 1; $i++) { 
+                array_push($latestComments, $publication->comments[$i]);
+            }
+        }
+        
         return view('publications.index', [
-            'publications' => $publications
+            'publications' => $publications,
+            'latest' => $latestComments
         ]);
     }
     
-    public function getPublication(int $id)
+    public function getPublication($id)
     {
         $publications = Publication::where('id', $id)->get();
+
 
         return view('publications.publication', [
             'publications' => $publications
@@ -98,7 +109,9 @@ class PublicationController extends Controller
 
     public function destroy(int $id)
     {
-        return Publication::where('user_id', $id)->delete();
+        Publication::where('id', $id)->delete();
+        
+        return $this->index();
     }
 
     public function getPhoto(string $filename)

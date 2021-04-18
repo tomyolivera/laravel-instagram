@@ -44,7 +44,7 @@
         </div>
 
         <div class="btns">
-            <a href="{{ route('publications.create') }}" class="btn1 text-center text-white text-decoration-none">Create Publication</a>
+            <a href="{{ route('publications.create') }}" class="btn1 text-center text-white text-decoration-none"><i class="fas fa-plus"></i></a>
         </div>
     
 

@@ -34,7 +34,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-block mt-3" :class="areValids() ? 'btn-success' : 'btn-danger'" id="btn_add" :disabled="!areValids()">
+                                <button class="btn_save_task btn btn-block mt-3" :class="areValids() ? 'btn-success' : 'btn-danger'" id="btn_add" :disabled="!areValids()">
                                     {{ areValids() ? 'Add' : 'Complete the fields!' }}
                                 </button>
                                 <span class="my-2 text-red-500" id="tasks_msg"></span>
@@ -48,23 +48,24 @@
 </template>
 
 <script>
+    import Store from '../Store';
+    import Tasks from './Tasks';
+
     export default {
         data(){
             return{
+                allTasks: Tasks.data().tasks,
                 task: {category_id: '', description: '', for: ''},
                 MIN: 1,
                 MAX_DESC: 800,
                 MAX_TASKS: 35,
             }
         },
+        created(){
+
+        },
         props: ['tasks', 'categories'],
         methods: {
-            closeModal(modal){
-                $('#' + modal).modal('toggle');
-            },
-            showMsg(field, msg = ""){
-                $("#" + field + "_msg").html(msg);
-            },
             areValids(){
                 return this.categories.length > 0 && this.task.category_id != "" && this.task.description != "" && this.task.for != "";
             },
@@ -75,12 +76,12 @@
                 let isValidFor = this.task.for != "";
 
                 isValidDesc
-                    ? this.showMsg("description")
-                    : this.showMsg("description", "The field description must contain " + this.MIN + "-" + this.MAX_DESC + " characters");                
+                    ? Store.methods.showMsg("description")
+                    : Store.methods.showMsg("description", "The field description must contain " + this.MIN + "-" + this.MAX_DESC + " characters");                
                     
                 isValidTasksLength
-                    ? this.showMsg("tasks")
-                    : this.showMsg("tasks", "Max tasks reached: " + this.MAX_TASKS);
+                    ? Store.methods.showMsg("tasks")
+                    : Store.methods.showMsg("tasks", "Max tasks reached: " + this.MAX_TASKS);
 
                 return isValidDesc && isValidTasksLength && isValidCategory && isValidFor;
             },
@@ -92,19 +93,13 @@
             add(){
                 if(!this.validFields()) return;
 
-                $("#btn_add").html("Saving...").attr({disabled: true});
+                Store.methods.statusBtn('save_task', 'Saving...', false);
 
-                const data = {
-                    description: this.task.description,
-                    category_id: this.task.category_id,
-                    for: this.task.for,
-                }
-
-                axios.post('/tasks', data).then( () => {
-                    $("#btn_add").html("Add").attr({disabled: false});
+                axios.post('/tasks', this.task).then(() => {
+                    Store.methods.statusBtn('save_task', 'Add', true)
                 });
 
-                this.closeModal("addTask");
+                Store.methods.closeModal("addTask");
                 this.resetFields();
             },
         }
