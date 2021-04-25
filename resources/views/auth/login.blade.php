@@ -3,23 +3,27 @@
 @section('title', 'Login')
 
 @section('content')
-
     <div class="pic">
         <div class="p-3 mb-0 text-center">
             <p class="h2">{{ __('Login') }}</p>
             <p class="text-green-500 my-3">{{ __('Complete with your data') }}</p>
             <hr class="mt-4" />
+
+        </div>
+        
+        <div class="text-center">
+            <strong class="text-red-700">{{ $error }}</strong>
         </div>
 
         <form method="POST" action="{{ route('login') }}" class="p-3">
             @csrf
 
-            {{-- Email --}}
+            {{-- Username --}}
             <div class="form-group mb-4">
-                <label for="email">{{ __('Email') }}</label>
-                <input type="email" name="email" id="email" class="input" required />
+                <label for="username">{{ __('Username') }}</label>
+                <input type="username" name="username" id="username" class="input" required />
 
-                @error('email')
+                @error('username')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -58,12 +62,16 @@
 
             <div class="form-group">
                 <button class="button btn_login d-block w-full my-3">{{ __('Login') }}</button>
-                {{-- <button class="btn btn-danger btn-block my-3">Google</button>
-                <button class="btn btn-primary btn-block my-3">Facebook</button> --}}
-
+                
                 <p class="text-center text-gray-600 h6">{{ __('Or') }}</p>
+                
+                <div class="flex align-center">
+                    <a href="{{ url('auth/google') }}" class="btn btn-danger btn-block my-3">Google</a>
+                    {{-- <a href="{{ url('auth/facebook') }}" class="btn btn-primary btn-block my-3">Facebook</a> --}}
+                    <a href="{{ url('auth/github') }}" class="btn btn-dark btn-block my-3 ml-2">Github</a>
+                </div>
 
-                <a href="{{ route('register') }}" class="text-decoration-none hover:text-black text-center button btn_register d-block w-full my-3">{{ __('Register') }}</a>
+                <a href="{{ route('register') }}" class="text-decoration-none hover:text-black text-center button btn_register d-block w-full my-3">{{ __('Create an account') }}</a>
             </div>
         </form>
     </div>

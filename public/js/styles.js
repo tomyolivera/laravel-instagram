@@ -19,6 +19,9 @@ $(".input").addClass(`bg-transparent border-1 border-gray-500 appearance-none le
 
 $(".is-invalid").addClass("border-red-500 focus:border-red-600");
 
+// Cuadro
+$(".pic").addClass(`bg-white container rounded shadow-xl text-black w-full md:w-1/2 lg:w-1/2 xl:w-1/4`);
+
 // Icons
 $("i").addClass("my-1 mx-2");
 
@@ -60,4 +63,9 @@ $(".button-yellow-light").addClass(`
 $(".button-red-light").addClass(`
         bg-red-200 text-red-700 transform 
         hover:text-red-800 hover:bg-red-300 focus:border-red-700
+    `);
+
+$(".button-red").addClass(`
+        bg-red-600 text-white transform 
+        hover:bg-red-800 focus:border-red-900
     `);

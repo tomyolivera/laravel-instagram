@@ -63,6 +63,7 @@
 
                 <div class="form-group flex align-center">
                     <button class="button button-green btn_save_data">Save</button>
+                    <button type="button" class="button button-green-light ml-2" @click="changeEdit()">Done</button>
                     <p id="fast_data_msg" class="m-2"></p>
                 </div>
             </form>
@@ -88,6 +89,7 @@
 
                 <div class="form-group flex align-center">
                     <button class="button button-green btn_save_photo">Save</button>
+                    <button type="button" class="button button-green-light ml-2" @click="changeEdit()">Done</button>
                     <p id="fast_photo_msg" class="m-2"></p>
                 </div>
             </form>
@@ -101,7 +103,7 @@
 
     export default {
         name: 'Userform',
-        props: ['user'],
+        props: ['user', 'edit', 'changeEdit'],
         data(){
             return {
                 actual_photo: '',
@@ -157,14 +159,21 @@
                 Store.methods.showMsg("fast_data");
 
                 axios.post('/user/update', this.user_edit).then((res) => {
-                    console.log(res);
-                    Store.methods.statusBtn('save_data', 'Save', true);
-                    Store.methods.showMsg("fast_data", res.data);
+                    if(res.data[1])
+                    {
+                        this.user.name = this.user_edit.name;
+                        this.user.username = this.user_edit.username;
+                        this.user.email = this.user_edit.email;
+                        this.user.status = this.user_edit.status;
+                        this.updateHeader(false);
+                        
+                        Store.methods.showMsg("fast_data", res.data[0]);
+                    }else{
+                        Store.methods.showMsg("fast_data", res.data[0], false);
+                    }
 
-                    this.user.name = this.user_edit.name;
-                    this.user.username = this.user_edit.username;
-                    this.user.email = this.user_edit.email;
-                    this.user.status = this.user_edit.status;
+                    Store.methods.statusBtn('save_data', 'Save', true);
+
                 });
             },
             updatePhoto(){
@@ -176,9 +185,23 @@
                     Store.methods.statusBtn('save_photo', 'Save', true);
                     Store.methods.showMsg("fast_photo", res.data["msg"]);
                     Store.methods.getPhoto(res.data["photo_name"], this.user);
+
                     this.actual_photo = "";
-                })
-            }
+                    this.user.photo = res.data["photo_name"];
+                    this.updateHeader();
+                });
+            },
+            updateHeader(a = true){
+                let template = `
+                    <img class="rounded-full h-10 w-10" 
+                        src="${a ? '/user/photo/' + this.user.photo : this.user.photo}" />
+                    <div class="m-2 text-white">
+                        ${this.user.name}
+                    </div>
+                    <div class="dropdown-toggle mt-2 text-white"></div>
+                `;
+                $("#user-data-header").html(template);
+            },
         }
     }
 </script>

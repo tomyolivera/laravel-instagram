@@ -1,3 +1,8 @@
 <div class="d-block">
-    <img class="w-10 h-10 rounded-full" src="{{ route('user.photo', ['filename' => Auth::user()->photo]) }}" />
+    <img class="w-12 h-12 rounded-full" 
+    src="{{ 
+        strlen(Auth::user()->photo) <= 25
+        ? route('user.photo', ['filename' => Auth::user()->photo]) 
+        : Auth::user()->photo
+    }}" />
 </div>

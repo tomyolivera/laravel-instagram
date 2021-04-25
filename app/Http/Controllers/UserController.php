@@ -17,6 +17,7 @@ class UserController extends Controller
 {
     private const UPDATED_SUCCESS = "Data updated successfully";
     private const ERR_UPDATED = "Something went wrong!";
+    private const ERR_USERNAME_EXISTS = "The username is already taken";
 
     public function __construct()
     {
@@ -32,26 +33,26 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::user();
+        if(User::where('username', $request->username)->first() && $request->username != Auth::user()->username){
+            return new Response([self::ERR_USERNAME_EXISTS, false]);
+        }else{
+            $user = Auth::user();
 
-        // Validate fields
-        // $validate = $this->validate($request, [
-        //     'name' => ['required', 'string', 'min:3', 'max:30'],
-        //     'username' => ['required', 'string', 'min:6', 'max:35', 'unique:users,username,' . $user->id],
-        //     'email' => ['required', 'email', 'unique:users,email,' . $user->id],
-        //     'status' => ['required']
-        // ]);
-
-        // Get & Set request data
-        $user->name = $request->name;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->status = $request->status;
-        
-        // Update table
-        $user->update();
-        
-        return new Response(self::UPDATED_SUCCESS);
+            $this->validate($request, [
+                'name' => ['required', 'string', 'min:3', 'max:30'],
+                'username' => ['required', 'string', 'min:6', 'max:35', 'unique:users,username,' . $user->id],
+                'email' => ['required', 'email'],
+                'status' => ['required']
+            ]);
+            
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->status = $request->status;
+            $user->update();
+            
+            return new Response([self::UPDATED_SUCCESS, true]);
+        }
     }
 
     public function setDarkMode(Request $request)
@@ -72,6 +73,11 @@ class UserController extends Controller
 
     public function updatePhoto(Request $request)
     {
+        if(Auth::user()->photo != "nophoto.png")
+        {
+            Storage::disk('users')->delete(Auth::user()->photo);
+        }
+
         $this->validate($request, [
             'photo' => ['required', 'image']
         ]);
@@ -87,6 +93,11 @@ class UserController extends Controller
         $user->update();
 
         return new Response(["msg" => self::UPDATED_SUCCESS, "photo_name" => $user->photo]);
+    }
+
+    public function destroy()
+    {
+        return DB::table('users')->where('id', Auth::user()->id)->delete();
     }
 
 }

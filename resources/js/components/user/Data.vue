@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="picture">
+        <div class="picture data" :class="edit ? 'hidden' : user.dark_mode ? 'dark' : ''">
             <div>
                 <h5>Profile</h5>
                 <p>Your personal information</p>
@@ -55,7 +55,13 @@
                 </tbody>
             </table>
 
+            <button class="button button-green-light" @click="edit = true">Edit</button>
+
             <p id="copy_msg" class="m-2"></p>
+        </div>
+
+        <div :class="edit ? '' : 'hidden'">
+            <form-edit-user :user="user" :edit="edit" :changeEdit="changeEdit" />
         </div>
 
         <div class="picture">
@@ -69,7 +75,15 @@
     
     export default {
         props: ['user'],
+        data(){
+            return {
+                edit: false
+            }
+        },
         methods: {
+            changeEdit(){
+                this.edit = false;
+            },
             copy(id){
                 Store.methods.copyToClipBoard(id);
                 Store.methods.showMsg("copy", "The data was copied to the clipboard!");

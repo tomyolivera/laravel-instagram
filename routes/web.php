@@ -41,6 +41,7 @@ Route::group(['prefix' => "user"], function(){
     Route::post('/updatePhoto', [App\Http\Controllers\UserController::class, 'updatePhoto'])->name('user.update_photo');
     Route::get('/photo/{filename}', [App\Http\Controllers\UserController::class, 'getPhoto'])->name('user.photo');
     Route::post('/darkMode', [App\Http\Controllers\UserController::class, 'setDarkMode'])->name('user.darkmode');
+    Route::delete('/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
 });
 
 Route::group(['prefix' => "profile"], function(){
@@ -56,3 +57,15 @@ Route::resource('/categorytasks', App\Http\Controllers\CategoryTaskController::c
 
 // Login & Register
 Auth::routes();
+
+// Google
+Route::get('auth/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback']);
+
+// Facebook
+Route::get('auth/facebook', [App\Http\Controllers\FacebookController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [App\Http\Controllers\FacebookController::class, 'handleFacebookCallback']);
+
+// Github
+Route::get('auth/github', [App\Http\Controllers\GithubController::class, 'redirectToGithub']);
+Route::get('auth/github/callback', [App\Http\Controllers\GithubController::class, 'handleGithubCallback']);

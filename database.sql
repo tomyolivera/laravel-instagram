@@ -8,13 +8,15 @@ CREATE TABLE IF NOT EXISTS users(
     status INT(1) NOT NULL DEFAULT 0,
     dark_mode BOOLEAN,
     role VARCHAR(20) NOT NULL DEFAULT 'user',
+    google_id VARCHAR(255),
+    github_id VARCHAR(255),
+    facebook_id VARCHAR(255),
     photo VARCHAR(500) NOT NULL DEFAULT 'nophoto.png',
     created_at DATETIME,
     updated_at DATETIME,
     remember_token VARCHAR(255),
 
     CONSTRAINT pk_users PRIMARY KEY(id),
-    CONSTRAINT uq_email UNIQUE(email),
     CONSTRAINT uq_username UNIQUE(username)
 )ENGINE=INNODB;
 

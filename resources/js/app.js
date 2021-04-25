@@ -2,6 +2,9 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+// Modals
+Vue.component('Modal', require('./components/modals/Modal.vue').default);
+
 // Tasks
 Vue.component('Task', require('./components/tasks/Task.vue').default);
 Vue.component('Tasks', require('./components/tasks/Tasks.vue').default);
@@ -17,6 +20,7 @@ Vue.component('User', require('./components/user/User.vue').default);
 Vue.component('user-status', require('./components/user/Status.vue').default);
 Vue.component('user-preferences', require('./components/user/Preferences.vue').default);
 Vue.component('user-data', require('./components/user/Data.vue').default);
+Vue.component('user-delete', require('./components/user/Delete.vue').default);
 Vue.component('form-edit-user', require('./components/user/UserForm.vue').default);
 
 const app = new Vue({

@@ -35,6 +35,12 @@
                 document.body.removeChild(aux);
             },
             getPhoto(photo, obj){
+                if(photo.length > 25)
+                {
+                    obj.photo = photo;
+                    return obj.photo;
+                }
+
                 axios.get(`/user/photo/${photo}`).then((res) => {
                     obj.photo = res.config.url;
                     return obj.photo;

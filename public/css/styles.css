@@ -58,6 +58,10 @@ body.dark{
     color: var(--gray) !important;
 }
 
+.table.dark > tbody > tr{
+    border-bottom: 1px solid var(--gray-dark);
+}
+
 /* Pictures */
 .picture{
     background: white;
@@ -110,9 +114,21 @@ body.dark{
     border-left: 2px solid var(--green);
 }
 
+.modal .modal-content.dark{
+    color:white !important;
+    background-color:var(--dark) !important;
+    border:2px dashed var(--gray-dark);
+}
+
 /* Buttons */
 .button-green.disabled,
 .button-green:disabled{
     color:white !important;
     background-color:gray !important;
+}
+
+.button-red.disabled,
+.button-red:disabled{
+    color:white !important;
+    background-color:rgb(214, 122, 122) !important;
 }
