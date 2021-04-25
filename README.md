@@ -3,6 +3,16 @@
 <p>Es un sitio en el que podés tener tus tareas, publicar imágenes, ver las imágenes de otros e interactuar con ellas.</p>
 
 ## Versiones
+<h5>Version 5.1</h5>
+<ul>
+    <li>
+        <p>Mejoras de optimización y rendimiento.</p>
+    </li>
+    <li>
+        <p>Se implementa el Log In con Google y Github</p>
+    </li>
+</ul>
+
 <h5>Version 5.0</h5>
 <ul>
     <li>
