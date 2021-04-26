@@ -31,7 +31,6 @@
 </ul>
 
 ## Tecnologías implementadas
-<p>Principalmente se utiliza PHP, JavaScript y SQL</p>
 <ul>
     <li><p>PHP 8 - <a href="https://laravel.com" target="_blank">Laravel 8</a></p></li>
     <li><p>JavaScript - <a href="https://vuejs.org/" target="_blank">Vue JS</a></p></li>
