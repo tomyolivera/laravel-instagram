@@ -41,28 +41,33 @@ $(".button").addClass(`
     `);
 
 $(".button-green").addClass(`
-        bg-green-300 text-gray-800 transform 
-        hover:text-gray-800 hover:bg-green-400 focus:border-teal-600
+        bg-green-400 text-black transform
+        hover:text-white hover:bg-green-700
     `);
     
 $(".button-green-light").addClass(`
         bg-gray-200 text-gray-800 transform 
-        hover:text-green-900 hover:bg-green-200 focus:border-teal-600
+        hover:text-green-900 hover:bg-green-200
+    `);
+
+$(".button-blue").addClass(`
+        bg-blue-500 text-white transform
+        hover:text-white hover:bg-blue-700
     `);
 
 $(".button-blue-light").addClass(`
         bg-blue-200 text-blue-600 transform 
-        hover:text-blue-800 hover:bg-blue-300 focus:border-blue-700
+        hover:text-blue-800 hover:bg-blue-300
     `);
 
 $(".button-yellow-light").addClass(`
         bg-yellow-200 text-yellow-600 transform 
-        hover:text-yellow-800 hover:bg-yellow-300 focus:border-yellow-700
+        hover:text-yellow-800 hover:bg-yellow-300
     `);
 
 $(".button-red-light").addClass(`
         bg-red-200 text-red-700 transform 
-        hover:text-red-800 hover:bg-red-300 focus:border-red-700
+        hover:text-red-800 hover:bg-red-300
     `);
 
 $(".button-red").addClass(`

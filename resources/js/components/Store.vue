@@ -1,4 +1,6 @@
 <script>
+    window.Permissions = []
+
     export default {
         name: 'Store',
         methods: {
@@ -50,7 +52,71 @@
                 return  type == "image/jpeg" ||
                         type == "image/jpg" || 
                         type == "image/png";
-            }
+            },
+            firstLetterUpper(string){
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            },
+            splitString(string, where = false){
+                let arr = [], 
+                    words = string.split(','),
+                    template = ``;
+
+                words.forEach(element => {
+                    arr.push(this.firstLetterUpper(element));
+                });
+
+                for (let i = 0; i < arr.length; i++){
+                    template += 
+                        i > 0 
+                            ? " | " + arr[i]
+                            : arr[i]
+                }
+
+                return template;
+            },
+            searchInArray(toSearch, arr){
+                let i = 0, found = false;
+
+                while (i < arr.length && !found) {
+                    if(arr[i].name == toSearch){
+                        found = true;
+                    }
+
+                    i++;
+                }
+
+                return found;
+            },
+            async hasPermission(permission){
+                return await new Promise((resolve, reject) => {
+                    const data = {
+                        permission: permission
+                    }
+
+                    axios.get('/user/hasPermission/', data)
+                        .then((res) => {                                
+                            resolve(this.searchInArray(permission, res.data));
+                        })
+                        .catch(error => {
+                            reject(error);
+                        });
+                });
+            },
+            async userCan(){
+                return await new Promise((resolve, reject) => {
+                    const data = {
+                        permission: permission
+                    }
+
+                    axios.get('/user/hasPermission/', data)
+                        .then((res) => {                                
+                            resolve(this.searchInArray(permission, res.data));
+                        })
+                        .catch(error => {
+                            reject(error);
+                        });
+                });
+            },
         }
     }
 </script>

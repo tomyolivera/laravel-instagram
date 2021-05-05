@@ -41,6 +41,8 @@ class GoogleController extends Controller
                     'password' => encrypt("123abcfacer123facer123"),
                 ]);
 
+                $newUser->assignRole('user');
+
                 Auth::login($newUser);
 
                 return redirect('/');

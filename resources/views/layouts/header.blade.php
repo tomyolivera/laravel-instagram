@@ -49,6 +49,10 @@
 
                             <a class="{{ $aclass }}" href="{{ route('user') }}"> <i class="far fa-user text-green-500"></i> <span>{{ __('My Profile') }}</span></a>
 
+                            @if (!Auth::user()->hasRole('user'))
+                                <a class="{{ $aclass }}" href="{{ route('admin') }}"> <i class="fas fa-user-shield text-yellow-500"></i> <span>{{ __('Admin') }}</span></a>
+                            @endif
+
                             <hr class="bg-white" />
 
                             <a class="{{ $aclass }}" href="{{ route('logout') }}"

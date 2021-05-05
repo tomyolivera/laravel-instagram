@@ -155,7 +155,7 @@
                         this.user.username.length < this.valid.MAX_USERNAME
             },
             update(){
-                Store.methods.statusBtn('save_data', 'Saving...', false);
+                Store.methods.statusBtn('save_data', 'Wait...', false);
                 Store.methods.showMsg("fast_data");
 
                 axios.post('/user/update', this.user_edit).then((res) => {
@@ -172,23 +172,32 @@
                         Store.methods.showMsg("fast_data", res.data[0], false);
                     }
 
-                    Store.methods.statusBtn('save_data', 'Save', true);
-
+                    setTimeout(() => {
+                        Store.methods.statusBtn('save_data', 'Save', true);
+                    }, 4000);
                 });
             },
             updatePhoto(){
-                Store.methods.statusBtn('save_photo', 'Saving...', false);
+                if(this.actual_photo == ""){
+                    Store.methods.showMsg("fast_photo", "Select an image!", false);
+                    return;
+                }
+                
+                Store.methods.statusBtn('save_photo', 'Wait...', false);
                 let formData = new FormData();
                 formData.append('photo', this.user_edit.photo);
 
                 axios.post('/user/updatePhoto', formData).then((res) => {
-                    Store.methods.statusBtn('save_photo', 'Save', true);
                     Store.methods.showMsg("fast_photo", res.data["msg"]);
                     Store.methods.getPhoto(res.data["photo_name"], this.user);
 
                     this.actual_photo = "";
                     this.user.photo = res.data["photo_name"];
                     this.updateHeader();
+
+                    setTimeout(() => {
+                        Store.methods.statusBtn('save_photo', 'Save', true);
+                    }, 4000);
                 });
             },
             updateHeader(a = true){

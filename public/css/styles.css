@@ -30,14 +30,22 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-/* Document */
-.navbar.dark{
-    background: var(--dark) !important;
+/* Cristal Effect */
+.cristal{
+    background: rgba(255, 255, 255, 0.2);
+    padding:14px;
+
+    backdrop-filter: blur(20px);
 }
 
+/* Document */
 body.dark{
     background-color: #0e1218 !important;
     color: var(--gray) !important;
+}
+
+.navbar.dark{
+    background: var(--dark) !important;
 }
 
 /* Scrollbar */
@@ -74,8 +82,7 @@ body.dark{
 
 .picture.dark{
     background:var(--dark) !important;
-    color:  var(--gray) !important;
-    /* box-shadow: 1px 1px 8px var(--blue-dark) !important; */
+    color:var(--gray) !important;
     border: 1px dashed var(--gray-dark);
 }
 
@@ -116,8 +123,8 @@ body.dark{
 
 .modal .modal-content.dark{
     color:white !important;
-    background-color:var(--dark) !important;
-    border:2px dashed var(--gray-dark);
+    background-color:#180f6e !important;
+    border:1px dashed var(--gray-dark);
 }
 
 /* Buttons */

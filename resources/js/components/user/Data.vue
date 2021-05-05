@@ -1,5 +1,10 @@
 <template>
     <div>
+        <h3>
+            <a class="hover:text-white text-decoration-none" href="#personalinformation">
+                Personal Information
+            </a>
+        </h3>
         <div class="picture data" :class="edit ? 'hidden' : user.dark_mode ? 'dark' : ''">
             <div>
                 <h5>Profile</h5>
@@ -47,11 +52,6 @@
                             </p>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>Mode:</td>
-                        <td>{{ user.dark_mode ? 'Dark' : 'Light' }}</td>
-                    </tr>
                 </tbody>
             </table>
 
@@ -64,7 +64,7 @@
             <form-edit-user :user="user" :edit="edit" :changeEdit="changeEdit" />
         </div>
 
-        <div class="picture">
+        <div>
             <user-preferences :dark_mode="user.dark_mode" />
         </div>
     </div>

@@ -1,29 +1,36 @@
 <template>
     <div>
-        <div class="mb-3 flex justify-between">
-            <div>
-                <h5>Dark Mode</h5>
-                <p>Choose between Light Mode and Dark Mode</p>
+        <h3>
+            <a class="hover:text-white text-decoration-none" href="#preferences">
+                Preferences
+            </a>
+        </h3>
+        <div class="picture">
+            <div class="mb-3 flex justify-between">
+                <div>
+                    <h5>Dark Mode</h5>
+                    <p>Choose between Light Mode and Dark Mode</p>
+                </div>
+                <div>
+                    <span class="badge bg-orange-700">Beta</span>
+                </div>
             </div>
-            <div>
-                <span class="badge bg-orange-700">Beta</span>
-            </div>
+
+            <form @submit.prevent="changeMode()" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="radio" name="mode" id="light" value="light" :checked="!dark_mode">
+                    <label for="light">Light</label><br>
+
+                    <input type="radio" name="mode" id="dark" value="dark" :checked="dark_mode">
+                    <label for="dark">Dark</label>
+                </div>
+
+                <div class="form-group flex align-center">
+                    <button class="button button-green btn_save_mode">Save</button>
+                    <p id="fast_mode_msg" class="m-2"></p>
+                </div>
+            </form>
         </div>
-
-        <form @submit.prevent="changeMode()" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="radio" name="mode" id="light" value="light" :checked="!dark_mode">
-                <label for="light">Light</label><br>
-
-                <input type="radio" name="mode" id="dark" value="dark" :checked="dark_mode">
-                <label for="dark">Dark</label>
-            </div>
-
-            <div class="form-group flex align-center">
-                <button class="button button-green btn_save_mode">Save</button>
-                <p id="fast_mode_msg" class="m-2"></p>
-            </div>
-        </form>
 
     </div>
 </template>

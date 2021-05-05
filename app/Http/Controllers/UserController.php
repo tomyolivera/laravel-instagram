@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -73,10 +75,7 @@ class UserController extends Controller
 
     public function updatePhoto(Request $request)
     {
-        if(Auth::user()->photo != "nophoto.png")
-        {
-            Storage::disk('users')->delete(Auth::user()->photo);
-        }
+        if(Auth::user()->photo != "nophoto.png") Storage::disk('users')->delete(Auth::user()->photo);
 
         $this->validate($request, [
             'photo' => ['required', 'image']
@@ -99,5 +98,4 @@ class UserController extends Controller
     {
         return DB::table('users')->where('id', Auth::user()->id)->delete();
     }
-
 }

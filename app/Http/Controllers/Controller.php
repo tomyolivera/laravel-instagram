@@ -11,11 +11,23 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function dump($element)
+    protected function dump(...$element)
     {
         echo "<pre>";
         var_dump($element);
         echo "</pre>";
         die();
+    }
+
+    protected function searchInArray($toSearch, $arr)
+    {
+        $i = 0; 
+        $found = false;
+
+        while ($i < count($arr) && !$found){
+            if($toSearch == $arr[$i]) $found = true;
+        }
+
+        return $found;
     }
 }

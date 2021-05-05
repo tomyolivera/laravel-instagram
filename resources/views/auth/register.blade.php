@@ -99,18 +99,31 @@
                         required />
             </div>
 
+            {{-- Re Captcha --}}
+            <div classs="form-group my-4">
+                {!! NoCaptcha::renderJs() !!}
+                {!! NoCaptcha::display() !!}
+                @error('g-recaptcha-response')
+                    <span class="alert alert-danger" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
             {{-- Extras --}}
-            <div class="form-group">
-                <button class="button btn_register d-block w-full my-3">{{ __('Register') }}</button>
+            <div class="form-group my-4">
+                <button id="btn_submit" type="submit" class="button button-blue d-block w-full my-3">{{ __('Register') }}</button>
 
                 <p class="text-center text-gray-600 h6">{{ __('Or') }}</p>
 
-                <a href="{{ route('login') }}" class="text-decoration-none hover:text-black text-center button btn_login d-block w-full my-3">{{ __('Login') }}</a>
+                @include('auth.social_buttons')
+
+                <a href="{{ route('login') }}" class="text-decoration-none hover:text-black text-center button button-green d-block w-full my-3">{{ __('I have an account') }}</a>
             </div>
         </form>
     </div>
 @endsection
 
-@section('js')
-    <script src="{{ asset('js/LoginRegister.js') }}"></script>
-@stop
+@section('javascript')
+    <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
+@endsection

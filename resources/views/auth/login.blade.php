@@ -8,7 +8,6 @@
             <p class="h2">{{ __('Login') }}</p>
             <p class="text-green-500 my-3">{{ __('Complete with your data') }}</p>
             <hr class="mt-4" />
-
         </div>
         
         <div class="text-center">
@@ -61,22 +60,15 @@
             @endif
 
             <div class="form-group">
-                <button class="button btn_login d-block w-full my-3">{{ __('Login') }}</button>
+                <button class="button button-green d-block w-full my-3">{{ __('Login') }}</button>
                 
                 <p class="text-center text-gray-600 h6">{{ __('Or') }}</p>
                 
-                <div class="flex align-center">
-                    <a href="{{ url('auth/google') }}" class="btn btn-danger btn-block my-3">Google</a>
-                    {{-- <a href="{{ url('auth/facebook') }}" class="btn btn-primary btn-block my-3">Facebook</a> --}}
-                    <a href="{{ url('auth/github') }}" class="btn btn-dark btn-block my-3 ml-2">Github</a>
-                </div>
-
-                <a href="{{ route('register') }}" class="text-decoration-none hover:text-black text-center button btn_register d-block w-full my-3">{{ __('Create an account') }}</a>
+                {{-- Login with social media --}}
+                @include('auth.social_buttons')
+                
+                <a href="{{ route('register') }}" class="text-decoration-none hover:text-black text-center button button-blue d-block w-full my-3">{{ __('Create an account') }}</a>
             </div>
         </form>
     </div>
 @endsection
-
-@section('js')
-    <script src="{{ asset('js/LoginRegister.js') }}"></script>
-@stop

@@ -37,6 +37,8 @@ Route::group(['prefix' => 'publications'], function(){
 // User
 Route::group(['prefix' => "user"], function(){
     Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('user');
+    Route::get('/hasPermission', [App\Http\Controllers\RoleController::class, 'getAuthUserPermissions'])->name('user.hasPermission');
+    Route::get('/userIsAllowedToByRole/{role}', [App\Http\Controllers\RoleController::class, 'userIsAllowedToByRole'])->name('user.userIsAllowedToByRole');
     Route::post('/update', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
     Route::post('/updatePhoto', [App\Http\Controllers\UserController::class, 'updatePhoto'])->name('user.update_photo');
     Route::get('/photo/{filename}', [App\Http\Controllers\UserController::class, 'getPhoto'])->name('user.photo');
@@ -57,6 +59,20 @@ Route::resource('/categorytasks', App\Http\Controllers\CategoryTaskController::c
 
 // Login & Register
 Auth::routes();
+
+Route::group(['prefix' => 'admin'], function(){
+    Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+
+    // Users
+    Route::get('/users', [App\Http\Controllers\AdminController::class, 'getUsers']);
+    Route::post('/users/delete', [App\Http\Controllers\AdminController::class, 'deleteUser']);
+
+    // Roles
+    Route::resource('/roles', App\Http\Controllers\RoleController::class);
+
+    // Statistics
+    Route::get('/statistics', [App\Http\Controllers\AdminController::class, 'getStatistics']);
+});
 
 // Google
 Route::get('auth/google', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle']);
