@@ -3,6 +3,22 @@
 <p>Es un sitio en el que podés tener tus tareas, publicar imágenes, ver las imágenes de otros e interactuar con ellas.</p>
 
 ## Versiones
+<h5>Version 5.2</h5>
+<ul>
+    <li>
+        <p>Mejoras de optimización y rendimiento.</p>
+    </li>
+    <li>
+        <p>Se implementa el ReCaptcha para la creación de cuentas</p>
+    </li>
+    <li>
+        <p>Nuevo sistema de roles y permisos (En progreso)</p>
+    </li>
+    <li>
+        <p>Sección para administradores (En progreso)</p>
+    </li>
+</ul>
+
 <h5>Version 5.1</h5>
 <ul>
     <li>
