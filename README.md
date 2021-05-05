@@ -3,6 +3,16 @@
 <p>Es un sitio en el que podés tener tus tareas, publicar imágenes, ver las imágenes de otros e interactuar con ellas.</p>
 
 ## Versiones
+<h5>Version 5.1</h5>
+<ul>
+    <li>
+        <p>Mejoras de optimización y rendimiento.</p>
+    </li>
+    <li>
+        <p>Se implementa el Log In con Google y Github</p>
+    </li>
+</ul>
+
 <h5>Version 5.0</h5>
 <ul>
     <li>
@@ -21,7 +31,6 @@
 </ul>
 
 ## Tecnologías implementadas
-<p>Principalmente se utiliza PHP, JavaScript y SQL</p>
 <ul>
     <li><p>PHP 8 - <a href="https://laravel.com" target="_blank">Laravel 8</a></p></li>
     <li><p>JavaScript - <a href="https://vuejs.org/" target="_blank">Vue JS</a></p></li>
