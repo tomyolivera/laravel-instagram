@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container mt-5">
-
         @foreach ($publications as $publication)
             <div class="row p-0 m-0">
                 <div class="col col-md-5 p-0">
@@ -45,6 +44,5 @@
                     </div>
                 </div>
         @endforeach
-
     </div>
 @endsection

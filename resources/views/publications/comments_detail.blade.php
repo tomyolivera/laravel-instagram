@@ -2,7 +2,7 @@
     @if ($publication->description)
         <div class="flex align-center my-2">
             <a href="{{ route('user', $publication->user->username) }}" class="text-black font-weight-bold text-decoration-none flex align-center">
-                <img class="w-8 h-8 rounded-full" src="{{ route('user.photo', ['filename' => $publication->user->photo]) }}" />
+                @include('user.photo', ["photo" => $publication->user->photo, "size" => "8"])
                 <span class="ml-2 mt-1">{{ __('@') }}{{ $publication->user->username }}:</span>
             </a>
 
@@ -18,7 +18,7 @@
         <hr class="my-2">
         <div class="flex align-center mt-3">
             <a href="{{ route('user', $comment->user->username) }}" class="text-black font-weight-bold text-decoration-none flex align-center">
-                <img class="w-8 h-8 rounded-full" src="{{ route('user.photo', ['filename' => $comment->user->photo]) }}" />
+                @include('user.photo', ["photo" => $comment->user->photo, "size" => "8"])
                 <span class="ml-2 mt-1">{{ __('@') }}{{ $comment->user->username }}:</span>
             </a>
 

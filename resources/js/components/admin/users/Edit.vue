@@ -47,7 +47,6 @@
 
 <script>
     import Store from '../../Store';
-
     export default {
         name: 'AdminUsers',
         props: ['user', 'id_modal'],
@@ -67,7 +66,6 @@
         methods: {
             edit(user){
                 
-
                 Store.methods.closeModal("editUser");
             }
         }

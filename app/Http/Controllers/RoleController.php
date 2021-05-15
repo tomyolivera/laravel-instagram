@@ -12,7 +12,7 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -64,15 +64,22 @@ class RoleController extends Controller
                 WHERE model_id = $user->id
             ");
 
-        $id = $mhr[0]->id;
+        $roles = [];
 
-        return DB::select(
-            "   SELECT p.name
-                FROM role_has_permissions rhp
-                JOIN roles r ON r.id = rhp.role_id
-                JOIN permissions p ON p.id = rhp.permission_id
-                WHERE r.id IN ($id)
-            ");
+        for ($i=0; $i < count($mhr); $i++) { 
+            $role = DB::select(
+                "   SELECT p.name
+                    FROM role_has_permissions rhp
+                    JOIN roles r ON r.id = rhp.role_id
+                    JOIN permissions p ON p.id = rhp.permission_id
+                    WHERE r.id IN (" . (string)$mhr[$i]->id . ")
+                    GROUP BY p.name
+                ");
+                
+            array_push($roles, $role);
+        }
+
+        return $roles;
     }
 
     /**

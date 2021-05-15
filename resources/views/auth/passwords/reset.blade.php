@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('adminlte::auth.passwords.reset')
 @section('title')
     {{ __('Reset password') }}
 @endsection

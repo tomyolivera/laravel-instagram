@@ -1,6 +1,4 @@
 <script>
-    window.Permissions = []
-
     export default {
         name: 'Store',
         methods: {
@@ -66,13 +64,14 @@
                 });
 
                 for (let i = 0; i < arr.length; i++){
-                    template += 
+                    template +=
                         i > 0 
-                            ? " | " + arr[i]
+                            ? '<p>' + arr[i] + '</p>'
                             : arr[i]
                 }
 
-                return template;
+                if(!where) return template;
+                else $(where).html(template);
             },
             searchInArray(toSearch, arr){
                 let i = 0, found = false;
@@ -87,34 +86,70 @@
 
                 return found;
             },
-            async hasPermission(permission){
-                return await new Promise((resolve, reject) => {
-                    const data = {
-                        permission: permission
-                    }
+            /**
+             *  @param string $pie *Options for type: pie, doughnut, bar, line, radar, polarArea, bubble, scatter*
+             */
+            makeChart(id, labels, dataS, color, type = "pie"){
 
-                    axios.get('/user/hasPermission/', data)
-                        .then((res) => {                                
-                            resolve(this.searchInArray(permission, res.data));
-                        })
-                        .catch(error => {
-                            reject(error);
-                        });
+                const canvas = $("#" + id);
+                var data = {
+                    labels: labels,
+                    datasets: [{
+                        data: dataS,
+                        backgroundColor: color
+                    }]
+                };
+
+                return new Chart(canvas, {
+                    type: type,
+                    data: data
                 });
             },
-            async userCan(){
-                return await new Promise((resolve, reject) => {
-                    const data = {
-                        permission: permission
-                    }
+            destroyTable(table){
+                $("#table_"+table).DataTable
+            },
+            drawTable(table){
+                this.destroyTable(table);
 
-                    axios.get('/user/hasPermission/', data)
-                        .then((res) => {                                
-                            resolve(this.searchInArray(permission, res.data));
-                        })
-                        .catch(error => {
-                            reject(error);
-                        });
+                $("#table_"+table).DataTable({
+                    dom: 
+                        "B<'row'<'mt-2 col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+                    ,
+                    buttons: [
+                        {
+                            "extend": "copyHtml5",
+                            "text": "<i class='fas fa-copy'></i> Copy",
+                            "titleAttr": "Copy to clipboard",
+                            "className": "btn btn-primary"
+                        },
+                        {
+                            "extend": "excelHtml5",
+                            "text": "<i class='fas fa-file-excel'></i> Excel",
+                            "titleAttr": "Export to Excel",
+                            "className": "btn btn-success"
+                        },
+                        {
+                            "extend": "pdfHtml5",
+                            "text": "<i class='fas fa-file-pdf'></i> PDF",
+                            "titleAttr": "Export to PDF",
+                            "className": "btn btn-danger"
+                        },
+                        {
+                            "extend": "csvHtml5",
+                            "text": "<i class='fas fa-file-csv'></i> CSV",
+                            "titleAttr": "Export to CSV",
+                            "className": "btn btn-secondary"
+                        },
+                        {
+                            "extend": "print",
+                            "text": "<i class='fas fa-print'></i> Print",
+                            "titleAttr": "Print",
+                            "className": "btn btn-warning"
+                        },
+                    ],
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, "All"]],
                 });
             },
         }

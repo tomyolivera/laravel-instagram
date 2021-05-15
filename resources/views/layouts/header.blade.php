@@ -33,10 +33,10 @@
                     <li class="nav-item dropdown"> 
                         <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <span id="user-data-header" class="flex align-center">
-                                @include('user.photo')
+                                @include('user.photo', ["photo" => Auth::user()->photo, "size" => "12"])
                                 <div class="mx-2 text-white">
                                     {{ Auth::user()->name }}
-                                    @include('user.status')
+                                    @include('user.status', ["status" => Auth::user()->status])
                                 </div>
                                 <div class="dropdown-toggle text-white"></div>
                             </span>
@@ -49,9 +49,9 @@
 
                             <a class="{{ $aclass }}" href="{{ route('user') }}"> <i class="far fa-user text-green-500"></i> <span>{{ __('My Profile') }}</span></a>
 
-                            @if (!Auth::user()->hasRole('user'))
-                                <a class="{{ $aclass }}" href="{{ route('admin') }}"> <i class="fas fa-user-shield text-yellow-500"></i> <span>{{ __('Admin') }}</span></a>
-                            @endif
+                            @can('get users')
+                                <a class="{{ $aclass }}" href="{{ route('dashboard') }}"> <i class="fas fa-user-shield text-yellow-500"></i> <span>{{ __('Admin') }}</span></a>
+                            @endcan
 
                             <hr class="bg-white" />
 

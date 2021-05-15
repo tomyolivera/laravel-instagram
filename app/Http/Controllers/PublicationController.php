@@ -14,31 +14,30 @@ class PublicationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth']);
     }
 
     public function index()
     {
         $publications = Publication::orderBy('id', 'desc')->get();
 
-        $latestComments = [];
+        // $latestComments = [];
 
-        foreach ($publications as $publication) {
-            for ($i=0; $i < 1; $i++) { 
-                array_push($latestComments, $publication->comments[$i]);
-            }
-        }
-        
+        // foreach ($publications as $publication) {
+        //     for ($i=0; $i < 1; $i++) { 
+        //         array_push($latestComments, $publication->comments[$i]);
+        //     }
+        // }
+
         return view('publications.index', [
             'publications' => $publications,
-            'latest' => $latestComments
+            // 'latest' => $latestComments
         ]);
     }
-    
+
     public function getPublication($id)
     {
         $publications = Publication::where('id', $id)->get();
-
 
         return view('publications.publication', [
             'publications' => $publications

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('adminlte::auth.login')
 
 @section('title', 'Register')
 

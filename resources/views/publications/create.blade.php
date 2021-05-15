@@ -3,8 +3,9 @@
 @section('title', 'Create publication')
 
 @section('content')
-    <div class="pic mt-5 p-3">
+    <div class="container picture mt-5 p-3">
         <h4>Create Publication</h4>
+        
         <form method="POST" action="{{ route('publications.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">

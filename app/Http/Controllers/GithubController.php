@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use DateTime;
 
 class GithubController extends Controller
 {
@@ -30,13 +31,17 @@ class GithubController extends Controller
                 
                 return redirect('/');
             }else{
+                $datetime = new DateTime();
+                $timestamp = $datetime->getTimestamp();
+                $rand = "facer_" . (string)($timestamp) . (string)rand(10, 99);
+
                 $newUser = User::create([
                     'photo' => $user->user["avatar_url"],
                     'name' => $user->user["login"],
-                    'username' => "",
+                    'username' => $rand,
                     'email' => $user->email,
                     'github_id' => $user->user["id"],
-                    'password' => encrypt("123abcfacer123facer123"),
+                    'password' => '',
                 ]);
 
                 $newUser->assignRole('user');

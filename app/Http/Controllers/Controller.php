@@ -30,4 +30,14 @@ class Controller extends BaseController
 
         return $found;
     }
+
+    /**
+     * @param int $cant
+     * @param int $total
+     * @return string
+     */
+    protected function getPercentage(int $cant, int $total): string
+    {
+        return (string)(round($cant / $total * 100));
+    }
 }

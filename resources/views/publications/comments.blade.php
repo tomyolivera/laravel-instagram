@@ -5,14 +5,14 @@
     </div>
 @endif
 
-@foreach ($latest as $item)
+{{-- @foreach ($latest as $item)
     @if ($publication->comments[0]->id == $item->id)
         <div class="flex align-center mb-2">
             <a href="{{ route('user', $item->user->username) }}" class="text-gray-700 font-weight-bold text-decoration-none">{{ __('@') }}{{ $item->user->username }}: </a>
             <a href="{{ route('publications.publication', $publication->id) }}" class="text-gray-800 hover:text-black text-decoration-none ml-2 truncate">{{ $item->description }}</a>
         </div>
     @endif
-@endforeach
+@endforeach --}}
 
 
 {{-- @if (count($publication->comments) > 0)

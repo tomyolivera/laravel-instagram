@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS comments(
     updated_at DATETIME,
 
     CONSTRAINT pk_comments PRIMARY KEY(id),
-    CONSTRAINT fk_comments_users FOREIGN KEY(user_id) REFERENCES users(id),
-    CONSTRAINT fk_comments_publications FOREIGN KEY(publication_id) REFERENCES publications(id)
+    CONSTRAINT fk_comments_users FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_comments_publications FOREIGN KEY(publication_id) REFERENCES publications(id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=MyISAM;
 
 INSERT INTO comments VALUES(null, 1, 3, "Alta foto", CURTIME(), CURTIME());
@@ -73,8 +73,8 @@ CREATE TABLE IF NOT EXISTS likes(
     updated_at DATETIME,
 
     CONSTRAINT pk_likes PRIMARY KEY(id),
-    CONSTRAINT fk_likes_users FOREIGN KEY(user_id) REFERENCES users(id),
-    CONSTRAINT fk_likes_publications FOREIGN KEY(publication_id) REFERENCES publications(id)
+    CONSTRAINT fk_likes_users FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_likes_publications FOREIGN KEY(publication_id) REFERENCES publications(id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=MyISAM;
 
 INSERT INTO likes VALUES(null, 1, 3, CURTIME(), CURTIME());
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS category_tasks(
     updated_at DATETIME,
 
     CONSTRAINT pk_tasks PRIMARY KEY(id),
-    CONSTRAINT fk_user_category_tasks FOREIGN KEY(user_id) REFERENCES users(id)
+    CONSTRAINT fk_user_category_tasks FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=INNODB;
 
 
@@ -100,11 +100,11 @@ CREATE TABLE IF NOT EXISTS tasks(
     user_id INT(11) NOT NULL,
     category_id INT(11) NOT NULL,
     description VARCHAR(35),
-    for_ DATE NOT NULL
+    for_ DATE NOT NULL,
     created_at DATETIME,
     updated_at DATETIME,
 
     CONSTRAINT pk_tasks PRIMARY KEY(id),
-    CONSTRAINT fk_user_tasks FOREIGN KEY(user_id) REFERENCES users(id),
-    CONSTRAINT fk_category_tasks FOREIGN KEY(category_id) REFERENCES category_tasks(id)
+    CONSTRAINT fk_user_tasks FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_category_tasks FOREIGN KEY(category_id) REFERENCES category_tasks(id) ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=INNODB;

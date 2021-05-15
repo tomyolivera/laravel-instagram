@@ -10,7 +10,6 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col col-md-6">
-
                 @foreach ($publications as $publication)
                     <div class="card mb-3">
                         {{-- DATA OF THE CREATOR --}}
@@ -32,14 +31,9 @@
                         </div>
                     </div>
                 @endforeach
-
             </div>
 
             <div class="col col-md-6 justify-center">
-                {{-- Side Menu --}}
-                {{-- <div class="fixed pic">
-                    <h3>Hola</h3>
-                </div> --}}
             </div>
         </div>
 

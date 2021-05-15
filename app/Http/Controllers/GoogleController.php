@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Ramsey\Uuid\Type\Time;
 
 class GoogleController extends Controller
 {
@@ -31,14 +34,17 @@ class GoogleController extends Controller
 
                 return redirect('/');
             }else{
+                $datetime = new DateTime();
+                $timestamp = $datetime->getTimestamp();
+                $rand = "facer_" . (string)($timestamp) . (string)rand(10, 99);
 
                 $newUser = User::create([
                     'photo' => $user->avatar,
                     'name' => $user->name,
-                    'username' => "",
+                    'username' => $rand,
                     'email' => $user->email,
                     'google_id' => $user->id,
-                    'password' => encrypt("123abcfacer123facer123"),
+                    'password' => '',
                 ]);
 
                 $newUser->assignRole('user');

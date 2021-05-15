@@ -48,7 +48,7 @@ class CommentController extends Controller
 
         $c->save();
 
-        return redirect("publications/$request->pid");
+        return redirect("publications/get/$request->pid");
     }
 
     /**
@@ -93,8 +93,9 @@ class CommentController extends Controller
      */
     public function destroy(int $id)
     {
+        $pid = Comment::select('publication_id')->where('id', $id)->first();
         Comment::where('id', $id)->delete();
         
-        return redirect("publications");
+        return redirect("publications/get/$pid->publication_id");
     }
 }

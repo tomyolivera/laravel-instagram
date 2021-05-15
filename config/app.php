@@ -177,7 +177,8 @@ return [
         App\Providers\FormatTimeServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        // Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
     /*
@@ -232,7 +233,7 @@ return [
         'FormatTime' => App\Helpers\FormatTime::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
-
+        // 'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

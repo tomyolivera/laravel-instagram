@@ -1,4 +1,4 @@
-<div class="flex justify-between align-center py-2" style="font-size: 16px">
+<div class="flex justify-between align-center p-2" style="font-size: 16px">
     <div>
         <i class="far fa-heart">@if (count($publication->likes) > 0) {{ count($publication->likes) }} @endif</i>
         <i class="far fa-comment"> {{ count($publication->comments) }}</i>

@@ -67,10 +67,51 @@ class UserController extends Controller
         return new Response(self::UPDATED_SUCCESS);
     }
 
+    public function useSocial()
+    {
+        return Auth::user()->github_id != null || Auth::user()->google_id != null;
+    }
+
+    public function userCan($permission)
+    {
+        $user = Auth::user();
+        $id = $user->id;
+
+        $sql = DB::select(
+            "   SELECT r.id
+                FROM role_user ru
+                JOIN roles r ON r.id = ru.role_id
+                JOIN users u ON u.id = $id
+            "
+        );
+
+        $roles = [];
+
+        for ($i=0; $i < count($sql); $i++) { 
+            $role = DB::select(
+                "   SELECT p.name
+                    FROM role_has_permissions rhp
+                    JOIN roles r ON r.id = rhp.role_id
+                    JOIN permissions p ON p.id = rhp.permission_id
+                    WHERE r.id IN (" . (string)$sql[$i]->id . ")
+                    GROUP BY p.name
+                ");
+                
+            array_push($roles, $role);
+        }
+
+        for ($i=0; $i < count($roles); $i++) { 
+            if($roles[$i][0]->name == $permission) return true;
+        }
+
+        return false;
+    }
+
     public function getPhoto($filename)
     {
-        $file = Storage::disk('users')->get($filename);
-        return new Response($file, 200);
+        return $this->useSocial();
+        // $file = Storage::disk('users')->get($filename);
+        // return new Response($file, 200);
     }
 
     public function updatePhoto(Request $request)
